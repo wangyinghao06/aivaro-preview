@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06090c">
+<title>Aivaro · 产品原型（演示模式）</title>
+<meta name="description" content="Aivaro 产品重构交互原型：官网、AI 对话工作台、模型中心、开发者中心、控制台与服务状态。当前为演示模式，不发起真实请求。">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="demo-ribbon"><strong>产品原型 · 演示模式</strong> — 本页所有对话回复与用量数字均为本地模拟，<strong>不发起真实请求、不消耗额度</strong>。真实服务仍为测试阶段，公开注册与充值尚未开放。</div>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#/home"><span class="logo-mark">A</span><span>Aivaro<small>AI API RELAY</small></span></a>
+    <nav class="mainnav" id="mainNav">
+      <a href="#/home" data-route="home">首页</a>
+      <a href="#/chat" data-route="chat">对话</a>
+      <a href="#/models" data-route="models">模型中心</a>
+      <a href="#/dev" data-route="dev">开发者</a>
+      <a href="#/console" data-route="console">控制台</a>
+      <a href="#/status" data-route="status">服务状态</a>
+    </nav>
+    <div class="top-actions">
+      <a class="btn btn-ghost btn-sm" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">现网对话站</a>
+      <a class="btn btn-pri btn-sm" href="https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">现网控制台</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= 首页 ================= -->
+<section class="view" data-view="home">
+  <div class="wrap">
+    <div class="hero">
+      <span class="eyebrow"><span class="dot ok"></span>网关运行中 · 测试阶段 · 注册与充值尚未开放</span>
+      <h1 class="big">一个 Key，<span class="grad-text">接入 AI 模型</span><br>每次调用，都有收据</h1>
+      <p class="lead">Aivaro 是 OpenAI 兼容的 AI API 网关：换一个 Base URL 就能调用模型。我们的不同之处是把账算到每一次请求 — 预扣多少、结算多少、退回多少，逐笔可查；请求失败时，给你的不是错误码，而是一张说人话的诊断卡。</p>
+      <div class="hero-actions">
+        <a class="btn btn-pri" href="#/chat">进入对话工作台（演示）</a>
+        <a class="btn btn-ghost" href="#/dev">一分钟接入 API</a>
+      </div>
+      <div class="notice"><strong>当前状态：测试阶段</strong>公开注册与充值尚未开放，不提供商业可用性与 SLA 承诺。当前仅接入一个免费测试模型；正式商用模型与费率将在合规上游确认后公布。本原型中的对话与数据均为演示。</div>
+    </div>
+
+    <h2 class="sec">为什么是 Aivaro</h2>
+    <div class="grid">
+      <div class="card"><h3>逐笔收据</h3><p>每次调用生成一张收据：模型、输入/输出 Token、预扣、结算、差额退回，一笔一笔对得上。费用不再是一团黑箱总数。</p></div>
+      <div class="card"><h3>失败诊断卡</h3><p>401、403、429、500 不再让人猜：诊断卡用一句话说明发生了什么、问题在哪一侧、下一步点哪里，并附可复制的诊断信息。</p></div>
+      <div class="card"><h3>模型真实状态</h3><p>模型中心只标真实状态：可用、限额、未接入，写得清清楚楚。没有接通的模型，绝不出现在「可用」列表里。</p></div>
+      <div class="card"><h3>Key 自主管理</h3><p>按用途创建独立 Key、各自设额度上限、随时撤销。泄露一个 Key，不影响其他业务。</p></div>
+    </div>
+
+    <h2 class="sec">从这里开始</h2>
+    <div class="grid">
+      <div class="card"><h3>对话工作台</h3><p>不用写代码，先在对话里感受模型：多会话、模型比较、流式输出、每条回复带收据。</p><p style="margin-top:10px"><a href="#/chat">打开对话 →</a></p></div>
+      <div class="card"><h3>模型中心</h3><p>查看每个模型的上下文、适用场景、真实可用状态与计量方式。</p><p style="margin-top:10px"><a href="#/models">查看模型 →</a></p></div>
+      <div class="card"><h3>开发者中心</h3><p>一分钟跑通第一次调用；错误码对照与自检清单，失败时先自己定位。</p><p style="margin-top:10px"><a href="#/dev">查看文档 →</a></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 对话 ================= -->
+<section class="view" data-view="chat">
+  <div class="wrap">
+    <div class="chat-shell">
+      <aside class="rail" id="rail">
+        <div class="rail-head">
+          <button class="btn btn-pri" id="newSessBtn" type="button">＋ 新建会话</button>
+          <input class="rail-search" id="sessSearch" type="search" placeholder="搜索会话…" aria-label="搜索会话">
+        </div>
+        <div class="sess-list" id="sessList"></div>
+      </aside>
+      <div class="chat-main">
+        <div class="chat-head">
+          <button class="icon-btn rail-toggle" id="railToggle" type="button" aria-label="打开会话列表">☰</button>
+          <button class="model-chip" id="modelChip" type="button">模型加载中… ▾</button>
+          <span class="badge demo">演示模式</span>
+          <div class="pulse" id="quotaPulse" title="演示数据：真实产品中由网关日志实时计算">
+            <span>今日用量 <b id="pulseToday">0</b> tok</span>
+            <span>剩余额度 <b id="pulseLeft">50,000</b></span>
+            <span>预计可用 <b id="pulseDays">—</b></span>
+          </div>
+        </div>
+        <div class="msgs" id="msgs"></div>
+        <div class="composer">
+          <div class="composer-in">
+            <textarea id="composerInput" rows="1" maxlength="2000" placeholder="输入你的问题…（演示模式，回复为本地模拟）" aria-label="输入你的问题"></textarea>
+            <button class="send-btn" id="sendBtn" type="button" aria-label="发送">↑</button>
+          </div>
+          <p class="hint">演示模式：回复由本地脚本模拟，不发送到任何服务器。真实对话站不保存记录；请勿输入敏感信息。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 模型中心 ================= -->
+<section class="view" data-view="models">
+  <div class="wrap">
+    <h1 style="font-size:32px;margin:6px 0 10px">模型中心</h1>
+    <p class="intro">只标真实状态。能力条为说明性评级，帮助理解模型定位，不构成性能承诺；费率在测试阶段为标定计量，不产生真实费用。</p>
+    <div class="grid">
+      <div class="card">
+        <h3>cohere/north-mini-code:free <span class="badge test">免费测试</span> <span class="badge live">可用</span></h3>
+        <p style="margin-bottom:12px">Cohere North Mini Code。当前唯一接入的模型，来自上游免费池，测试用户共享每日限额（50 次量级），高峰可能返回 429。</p>
+        <div class="meter-lab"><span>上下文窗口</span><span>256K</span></div><div class="meter"><i style="width:86%"></i></div>
+        <div class="meter-lab"><span>代码能力（定位）</span><span>偏强</span></div><div class="meter"><i style="width:72%"></i></div>
+        <div class="meter-lab"><span>通用对话（定位）</span><span>中等</span></div><div class="meter"><i style="width:55%"></i></div>
+        <div class="meter-lab"><span>响应速度（免费池）</span><span>不稳定</span></div><div class="meter"><i style="width:45%"></i></div>
+        <p>计量：测试标定 1:1 记录用量；失败不计费。在 <a href="#/chat">对话工作台</a> 或按 <a href="#/dev">接入文档</a> 调用。</p>
+      </div>
+      <div class="card" style="opacity:.75">
+        <h3>更多模型 <span class="badge">尚未接入</span></h3>
+        <p>正式商用模型将在合规上游（条款明确允许商业使用与 API 转供）确认后逐个接入并在此公布。在此之前，本页不会出现任何「即将上线」的具体型号与价格 — 没接通，就不宣传。</p>
+      </div>
+      <div class="card">
+        <h3>怎么选模型？</h3>
+        <p>测试阶段只有一个模型，其实不用选。等模型变多时，这里会提供：按任务找模型（写代码/长文档/快速问答）、同题对比试驾（同一问题并排问两个模型，比较回答、耗时与费用）。原型阶段可在对话页用模型选择器预览交互。</p>
+      </div>
+    </div>
+
+    <h2 class="sec">计量方式（与现网一致）</h2>
+    <div class="grid">
+      <div class="card"><h3>按 Token 计量</h3><p>按上游返回的实际用量记录；每次调用生成收据，预扣与结算的差额自动退回。</p></div>
+      <div class="card"><h3>失败不计费</h3><p>请求失败、超时或被上游拒绝时不扣减额度，已预扣的在结算时退回。</p></div>
+      <div class="card"><h3>额度上限</h3><p>用户总额度与单个 Key 上限相互独立，任一耗尽返回 403 并给出诊断卡。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 开发者 ================= -->
+<section class="view" data-view="dev">
+  <div class="wrap">
+    <h1 style="font-size:32px;margin:6px 0 10px">开发者中心</h1>
+    <p class="intro">目标：新用户在几分钟内完成第一次成功调用；失败时，先在这里自检，再去提问。</p>
+
+    <h2 class="sec">一分钟接入向导</h2>
+    <div class="grid">
+      <div class="card"><h3>① 拿到 Key</h3><p>测试阶段由管理员发放测试 Key；已有测试账号的用户在控制台自助创建。<span class="badge demo">原型演示</span></p></div>
+      <div class="card"><h3>② 填进示例</h3><p>下方示例把 <code>sk-xxxxxxxx</code> 换成你的 Key 即可运行；模型 ID 必须与模型中心公布的完全一致。</p></div>
+      <div class="card"><h3>③ 核对收据</h3><p>调用成功后，在控制台用量记录里找到这笔请求的收据，核对 Token 与扣减。</p></div>
+    </div>
+    <pre style="margin-top:16px"><code>curl https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <redacted>" \
+  -d '{
+    "model": "cohere/north-mini-code:free",
+    "messages": [{"role": "user", "content": "你好，请用一句话介绍你自己"}]
+  }'</code></pre>
+
+    <h2 class="sec">错误诊断（点状态码看说明）</h2>
+    <div class="pill-tabs" id="errTabs">
+      <button type="button" data-err="401">401 密钥无效</button>
+      <button type="button" data-err="403">403 额度不足</button>
+      <button type="button" data-err="404">404 模型不存在</button>
+      <button type="button" data-err="429">429 过于频繁</button>
+      <button type="button" data-err="500">500 上游异常</button>
+    </div>
+    <div class="card" id="errCard"><p>选择一个状态码，这里会给出：发生了什么、问题在哪一侧、按顺序排查的步骤。这正是未来每次失败请求都会附带的「诊断卡」。</p></div>
+
+    <h2 class="sec">完整文档</h2>
+    <p class="intro">参数表、Python / Node 示例与用量核对方法见现网文档页（内容与网关行为一致）：<a href="https://aivaro.dpdns.org/docs.html" target="_blank" rel="noopener">aivaro.dpdns.org/docs.html</a>。原型阶段不重复搬运，避免两份文档口径漂移。</p>
+  </div>
+</section>
+
+<!-- ================= 控制台 ================= -->
+<section class="view" data-view="console">
+  <div class="wrap">
+    <h1 style="font-size:32px;margin:6px 0 10px">控制台 <span class="badge demo">概念预览 · 演示数据</span></h1>
+    <p class="intro">这是 Aivaro 自有控制台的设计方向。当前真实控制台仍是网关自带界面（点顶栏「现网控制台」进入）；下方数字全部为演示数据。</p>
+    <div class="kv">
+      <div class="card"><div class="stat-num">48,213</div><div class="stat-lab">剩余额度（演示）</div></div>
+      <div class="card"><div class="stat-num">1,787</div><div class="stat-lab">今日已用（演示）</div></div>
+      <div class="card"><div class="stat-num">23</div><div class="stat-lab">今日请求数（演示）</div></div>
+      <div class="card"><div class="stat-num">0</div><div class="stat-lab">待处理异常（演示）</div></div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>近 14 天用量（演示）</h3>
+      <div class="bars" id="usageBars"></div>
+      <div class="bars-x" id="usageBarsX"></div>
+    </div>
+    <h2 class="sec">最近请求（每行都是一张收据）</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>时间</th><th>模型</th><th>输入/输出 tok</th><th>预扣 → 结算（退回）</th><th>状态</th></tr></thead>
+      <tbody>
+        <tr><td>11:02:14</td><td><code>cohere/north-mini-code:free</code></td><td>212 / 480</td><td>731 → 692（退 39）</td><td><span class="badge live">成功</span></td></tr>
+        <tr><td>10:58:37</td><td><code>cohere/north-mini-code:free</code></td><td>96 / 0</td><td>512 → 0（全额退回）</td><td><span class="badge test">上游失败 · 未计费</span></td></tr>
+        <tr><td>10:41:09</td><td><code>cohere/north-mini-code:free</code></td><td>58 / 231</td><td>402 → 289（退 113）</td><td><span class="badge live">成功</span></td></tr>
+      </tbody>
+    </table></div>
+    <p class="intro" style="margin-top:12px">收据里的预扣/结算/退回来自网关的计费台账 — 这套机制已在现网运行（失败不计费、差额自动退回），控制台要做的只是把它逐笔展示出来。</p>
+  </div>
+</section>
+
+<!-- ================= 状态 ================= -->
+<section class="view" data-view="status">
+  <div class="wrap">
+    <h1 style="font-size:32px;margin:6px 0 10px">服务状态与故障诊断</h1>
+    <p class="intro">网关状态为实时查询（与现网状态页同一数据源）；其余组件为原型演示状态，不代表实时监测。</p>
+    <div class="card">
+      <p style="margin:0 0 4px;font-size:18px"><span class="dot" id="gwDot"></span> <strong id="gwTitle">正在查询网关状态…</strong></p>
+      <p style="margin:2px 0;color:var(--soft)" id="gwMeta"></p>
+      <p style="margin:2px 0;color:var(--dim);font-size:13.5px" id="gwChecked"></p>
+    </div>
+    <h2 class="sec">故障自检向导</h2>
+    <p class="intro">先选症状，向导帮你区分是网关、上游还是请求参数的问题：</p>
+    <div class="pill-tabs" id="diagTabs">
+      <button type="button" data-diag="401">返回 401</button>
+      <button type="button" data-diag="403">返回 403</button>
+      <button type="button" data-diag="429">返回 429</button>
+      <button type="button" data-diag="slow">对话站一直转圈</button>
+      <button type="button" data-diag="down">页面打不开</button>
+    </div>
+    <div class="card" id="diagCard"><p>选择症状，这里会给出判断路径与下一步。</p></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><strong style="color:var(--ink)">Aivaro</strong><p style="margin:6px 0 0;max-width:380px">AI API 中转服务 · 测试阶段，运行于免费托管环境，不提供 SLA。本页为产品原型，演示数据不代表真实服务状态。</p></div>
+    <nav>
+      <a href="#/models">模型中心</a><a href="#/dev">开发者</a><a href="#/status">服务状态</a><a href="https://aivaro.dpdns.org/terms.html" target="_blank" rel="noopener">服务条款（草案）</a><a href="https://aivaro.dpdns.org/privacy.html" target="_blank" rel="noopener">隐私政策（草案）</a><a href="https://aivaro.dpdns.org/contact.html" target="_blank" rel="noopener">联系我们</a>
+    </nav>
+  </div>
+</footer>
+
+<nav class="tabbar" id="tabbar">
+  <a href="#/home" data-route="home">首页</a>
+  <a href="#/chat" data-route="chat">对话</a>
+  <a href="#/models" data-route="models">模型</a>
+  <a href="#/dev" data-route="dev">开发</a>
+  <a href="#/console" data-route="console">控制台</a>
+  <a href="#/status" data-route="status">状态</a>
+</nav>
+
+<!-- 模型选择 sheet -->
+<div class="sheet-mask" id="sheetMask"></div>
+<div class="sheet" id="modelSheet" role="dialog" aria-label="选择模型">
+  <h3>选择模型</h3>
+  <p class="sub">状态来自模型中心的真实清单。未接入的模型不可选 — 宁可少，不假装有。</p>
+  <div id="modelOptions"></div>
+  <button class="btn btn-ghost" id="sheetClose" type="button" style="width:100%">关闭</button>
+</div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
