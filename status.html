@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#06090c">
+<title>服务状态 · Aivaro</title>
+<meta name="description" content="Aivaro 网关实时状态与公告。当前为测试阶段，公开注册与支付尚未开放。">
+<link rel="stylesheet" href="style.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html"><span class="logo-mark">A</span><span>Aivaro<small>AI API RELAY</small></span></a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html">首页</a>
+      <a href="models.html">模型</a>
+      <a href="docs.html">接入文档</a>
+      <a href="status.html">服务状态</a>
+      <a href="terms.html">服务条款</a>
+      <a href="privacy.html">隐私政策</a>
+      <a href="contact.html">联系我们</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost" href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">在线体验</a>
+      <a class="btn btn-primary" href="https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">控制台</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h1 class="page-title">服务状态</h1>
+    <p class="page-intro">下方状态由本页实时向网关查询（经本站服务端转发，约每 30 秒缓存一次）。测试环境运行于免费托管，主机闲置时会自动暂停，下一次访问会触发唤醒并可能需要数秒，请以实际打开速度为准。</p>
+
+    <section class="block">
+      <div class="status-card" id="status-card">
+        <p class="status-line"><span class="dot" id="status-dot"></span><span id="status-title">正在查询网关状态…</span></p>
+        <p class="status-meta" id="status-version"></p>
+        <p class="status-meta" id="status-uptime"></p>
+        <p class="status-meta" id="status-checked"></p>
+      </div>
+      <p style="margin-top:12px">
+        直接访问：<a href="https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">API 网关 / 控制台</a>
+        · <a href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">在线体验（AI 对话演示）</a>
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>公告</h2>
+      <div class="card">
+        <h3>2026-11-01 · 测试环境运行中</h3>
+        <p>网关与在线体验已在测试环境上线，当前接入一个免费测试模型，用于验证调用、计量与额度链路。<strong>公开注册与支付尚未开放</strong>，不提供商业可用性承诺；免费托管存在闲置暂停与单次运行时长上限，短时无法打开通常是主机处于暂停或冷却，稍后再试即可。</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div>
+      <strong>Aivaro</strong>
+      <p>AI API 中转服务 · 当前为测试阶段，运行于免费托管环境，不提供 SLA。</p>
+    </div>
+    <nav class="footer-links">
+      <a href="models.html">模型</a>
+      <a href="docs.html">接入文档</a>
+      <a href="status.html">服务状态</a>
+      <a href="terms.html">服务条款（草案）</a>
+      <a href="privacy.html">隐私政策（草案）</a>
+      <a href="contact.html">联系我们</a>
+    </nav>
+  </div>
+  <div class="container footer-bottom">© 2026 Aivaro · 本站条款与隐私政策为草案，以正式发布版本为准。</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+  var dot = document.getElementById("status-dot");
+  var title = document.getElementById("status-title");
+  var versionEl = document.getElementById("status-version");
+  var uptimeEl = document.getElementById("status-uptime");
+  var checkedEl = document.getElementById("status-checked");
+
+  function fmtDuration(sec) {
+    if (sec < 60) return "约 " + Math.floor(sec) + " 秒";
+    if (sec < 3600) return "约 " + Math.floor(sec / 60) + " 分钟";
+    if (sec < 86400) return "约 " + (sec / 3600).toFixed(1) + " 小时";
+    return "约 " + (sec / 86400).toFixed(1) + " 天";
+  }
+
+  function fail(msg) {
+    dot.className = "dot bad";
+    title.textContent = msg || "暂时无法获取网关状态";
+    versionEl.textContent = "网关可能正在唤醒或处于暂停，请稍后刷新本页重试。";
+    uptimeEl.textContent = "";
+  }
+
+  fetch("https://8081-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech/api/status", { headers: { "Accept": "application/json" } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j || j.ok === false) { fail("网关当前不可达"); return; }
+      var d = j.data || j;
+      if (j.success === false) { fail("网关返回异常状态"); return; }
+      dot.className = "dot ok";
+      title.textContent = "网关在线，接口可达";
+      if (d.version) {
+        versionEl.textContent = "网关版本：" + d.version;
+      } else {
+        versionEl.textContent = "";
+      }
+      if (typeof d.start_time === "number" && d.start_time > 0) {
+        var up = Date.now() / 1000 - d.start_time;
+        uptimeEl.textContent = up > 0 ? ("本次启动至今：" + fmtDuration(up)) : "";
+      } else if (d.uptime) {
+        uptimeEl.textContent = "运行时长：" + d.uptime;
+      } else {
+        uptimeEl.textContent = "运行状态：在线（测试环境，闲置时可能暂停）";
+      }
+    })
+    .catch(function () { fail("暂时无法获取网关状态"); })
+    .finally(function () {
+      checkedEl.textContent = "查询时间：" + new Date().toLocaleString("zh-CN");
+    });
+})();
+</script>
+
+</body>
+</html>
