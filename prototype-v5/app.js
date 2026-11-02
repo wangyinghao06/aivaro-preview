@@ -288,7 +288,7 @@ function loadGatewayStatus() {
     })
     .catch(() => {
       dot.className = "dot bad";
-      txt.textContent = "暂时无法取得状态：可能是沙盒闲置暂停（免费计划 30 分钟无活动自动暂停，下一次访问会唤醒，约需 15–45 秒），稍后刷新本页重试。";
+      txt.textContent = "暂时无法取得状态：状态接口未向本站开放跨域读取，或沙盒处于暂停/唤醒中。网关是否在线，可打开现网控制台确认。";
     });
 }
 
