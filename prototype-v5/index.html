@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fbfaf7">
+<title>Aivaro · 对话</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<div class="demo-strip">产品原型 · 演示模式 — 所有回复与账单数字为本地模拟，不发起真实请求、不消耗额度。真实服务仍为测试阶段，公开注册与充值尚未开放。</div>
+<div class="app" id="app">
+
+  <!-- ===== 左侧栏 ===== -->
+  <div class="scrim" id="scrim"></div>
+  <aside class="rail" id="rail" aria-label="会话与导航">
+    <div class="rail-brand">
+      <span class="brand-mark">A</span>
+      <span class="brand-name">Aivaro</span>
+      <button class="icon-btn rail-x" id="railClose" aria-label="关闭侧栏">✕</button>
+    </div>
+    <button class="new-btn" id="newSessBtn">＋&nbsp; 新建对话</button>
+    <input class="sess-search" id="sessSearch" type="search" placeholder="搜索会话" aria-label="搜索会话">
+    <nav class="sess-list" id="sessList" aria-label="历史会话"></nav>
+    <div class="rail-foot">
+      <div class="quota-mini" id="quotaMini" title="演示额度数据">
+        <div class="qm-row"><span>剩余额度（演示）</span><span id="qmLeft">50,000</span></div>
+        <div class="qm-bar"><i id="qmBar" style="width:100%"></i></div>
+        <div class="qm-sub">今日已用 <span id="qmToday">0</span> · 预计可用 <span id="qmDays">—</span></div>
+      </div>
+      <nav class="aux-links" aria-label="辅助导航">
+        <button data-view="models">模型中心</button>
+        <button data-view="dev">开发者</button>
+        <button data-view="status">服务状态</button>
+        <button data-view="about">关于 Aivaro</button>
+      </nav>
+      <div class="rail-links">
+        <a href="https://8080-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">现网对话站</a>
+        <a href="https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">现网控制台</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===== 主区域 ===== -->
+  <main class="stage">
+    <header class="topbar">
+      <button class="icon-btn only-mobile" id="railOpen" aria-label="打开会话列表">☰</button>
+      <button class="model-pill" id="modelPill" aria-haspopup="dialog">
+        <span class="dot ok"></span><span id="modelPillName">Cohere North Mini Code</span><span class="tag-free">免费</span><span class="chev">▾</span>
+      </button>
+      <div class="top-right">
+        <span class="pulse" id="pulse" title="演示额度数据">剩余 <span id="pulseLeft">50,000</span></span>
+        <a class="console-btn" href="https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech" target="_blank" rel="noopener">控制台</a>
+      </div>
+    </header>
+
+    <!-- 对话视图（默认） -->
+    <section class="view view-chat" id="view-chat">
+      <div class="thread" id="thread">
+        <div class="welcome" id="welcome">
+          <h1 class="greeting">你好，我是 Aivaro</h1>
+          <p class="w-sub">当前模型 Cohere North Mini Code · 免费测试 · 每次回复下方附带用量收据</p>
+          <div id="composerSlotEmpty"></div>
+          <div class="chips" id="chips">
+            <button class="chip" data-chip="code">写一段 Python 代码</button>
+            <span class="chip-sep">·</span>
+            <button class="chip" data-chip="billing">额度怎么扣费</button>
+            <span class="chip-sep">·</span>
+            <button class="chip" data-chip="__diag__">演示：请求失败诊断</button>
+          </div>
+        </div>
+        <div id="messages"></div>
+      </div>
+      <div id="dockSlotBottom"></div>
+    </section>
+
+    <!-- 模型视图 -->
+    <section class="view" id="view-models" hidden>
+      <div class="page">
+        <button class="back-btn" data-view="chat">← 返回对话</button>
+        <h2>模型中心</h2>
+        <p class="page-sub">只列真实接入状态。未接入的模型不会出现名称和价格。</p>
+        <article class="card">
+          <div class="mc-head"><code>cohere/north-mini-code:free</code><span class="tag-free">免费测试</span><span class="tag-ok">可用</span></div>
+          <p>Cohere 出品的代码与通用对话模型。经 OpenRouter 免费池接入，与所有免费用户共享每日约 50 次的池子额度，高峰期可能返回 429——遇到时诊断卡会告诉你原因和下一步。</p>
+          <div class="meters">
+            <div class="meter"><span>上下文窗口 256K</span><div class="bar"><i style="width:86%"></i></div></div>
+            <div class="meter"><span>代码能力定位 · 偏强</span><div class="bar"><i style="width:72%"></i></div></div>
+            <div class="meter"><span>通用对话定位 · 中等</span><div class="bar"><i style="width:55%"></i></div></div>
+            <div class="meter"><span>免费池速度 · 不稳定</span><div class="bar"><i style="width:45%"></i></div></div>
+          </div>
+          <p class="fine">能力条为定位说明，不是性能承诺。</p>
+        </article>
+        <article class="card dim">
+          <div class="mc-head"><span>更多模型</span><span class="tag-none">尚未接入</span></div>
+          <p>新的模型完成真实接入和测试后才会出现在这里，并标注价格与可用状态。</p>
+        </article>
+        <article class="card">
+          <h3>计费口径（与网关现行规则一致）</h3>
+          <ul class="rules">
+            <li>按实际输入/输出 token 计量；请求失败不计费。</li>
+            <li>每笔调用先预扣、后按实际用量结算，多退少补——收据里能逐笔看到。</li>
+            <li>用户总额度与每把 Key 的上限互相独立，任一耗尽返回 403 并给出诊断。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- 开发者视图 -->
+    <section class="view" id="view-dev" hidden>
+      <div class="page">
+        <button class="back-btn" data-view="chat">← 返回对话</button>
+        <h2>开发者</h2>
+        <p class="page-sub">三步完成第一次调用，每一步都能验证。</p>
+        <div class="steps">
+          <article class="step"><h3>1 · 拿到测试 Key</h3><p>在控制台创建 API Key（测试阶段仅限管理员发放）。Key 只显示一次，请妥善保存。</p></article>
+          <article class="step"><h3>2 · 发起调用</h3><p>接口兼容 OpenAI 格式，把 base_url 换成网关地址即可。</p></article>
+          <article class="step"><h3>3 · 核对收据</h3><p>在控制台日志里核对这一笔的预扣、结算与退回，和你的预期对上再继续。</p></article>
+        </div>
+        <div class="codeblock"><div class="cb-bar"><span>curl 示例（Key 为占位符）</span><button data-copy>复制</button></div><pre>curl https://3000-agqyuuzd3ejtzmhsnnby2wcjxm.instabox.tech/v1/chat/completions \
+  -H "Authorization: Bearer sk-xxxxxxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "cohere/north-mini-code:free",
+    "messages": [{"role": "user", "content": "你好"}]
+  }'</pre></div>
+        <h3 class="sect">错误自检（错误医生）</h3>
+        <div class="err-tabs" id="errTabs">
+          <button data-err="401" class="on">401</button><button data-err="403">403</button><button data-err="404">404</button><button data-err="429">429</button><button data-err="500">500</button>
+        </div>
+        <div id="errCard"></div>
+        <p class="fine">完整文档见现网文档页：<a href="https://aivaro.dpdns.org/docs.html" target="_blank" rel="noopener">aivaro.dpdns.org/docs.html</a>（原型不另维护一份，避免两处内容漂移）。</p>
+      </div>
+    </section>
+
+    <!-- 状态视图 -->
+    <section class="view" id="view-status" hidden>
+      <div class="page">
+        <button class="back-btn" data-view="chat">← 返回对话</button>
+        <h2>服务状态</h2>
+        <p class="page-sub">网关状态为真实接口数据（与现网状态页同源）；其余组件为原型演示状态，不代表实时监控。</p>
+        <div class="status-list">
+          <div class="status-row"><span class="dot" id="gwDot"></span><div><strong>API 网关</strong><small id="gwText">正在查询…</small></div></div>
+          <div class="status-row"><span class="dot ok"></span><div><strong>对话站（现网）</strong><small>演示标注：页面可达性已验证，对话功能依赖网关与上游免费池</small></div></div>
+          <div class="status-row"><span class="dot warn"></span><div><strong>上游免费池</strong><small>演示标注：共享额度，耗尽后返回 429，次日恢复</small></div></div>
+        </div>
+        <h3 class="sect">故障自检向导</h3>
+        <div class="err-tabs" id="wizTabs">
+          <button data-wiz="401" class="on">返回 401</button><button data-wiz="403">返回 403</button><button data-wiz="429">返回 429</button><button data-wiz="spin">对话站一直转圈</button><button data-wiz="down">页面打不开</button>
+        </div>
+        <div id="wizCard"></div>
+      </div>
+    </section>
+
+    <!-- 关于视图 -->
+    <section class="view" id="view-about" hidden>
+      <div class="page">
+        <button class="back-btn" data-view="chat">← 返回对话</button>
+        <h2>关于 Aivaro</h2>
+        <p class="page-sub">Aivaro 是一个 AI API 网关与多模型使用平台，目前处于测试阶段。这个页面是原来的品牌介绍——现在它退到辅助位置，产品的主角是对话。</p>
+        <article class="card">
+          <h3>我们的两条产品原则</h3>
+          <ul class="rules">
+            <li><strong>每次调用，都有收据。</strong>预扣多少、结算多少、退回多少，逐笔可查；失败不计费不是口号，是可以核对的账目。</li>
+            <li><strong>每次失败，都有诊断。</strong>错误会说明问题出在网关、上游还是请求本身，并给出下一步，而不是只扔一个状态码。</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>当前真实状态</h3>
+          <ul class="rules">
+            <li>已接入并可用：Cohere North Mini Code（免费测试，经 OpenRouter 免费池）。</li>
+            <li>公开注册与充值尚未开放；支付、BYOK 尚未对外开放。</li>
+            <li>服务由个人维护，不提供可用性 SLA。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 输入区（空状态时位于欢迎区内，对话开始后移到底部） -->
+<div class="composer-dock" id="composerDock">
+  <div class="composer" id="composer">
+    <textarea id="composerInput" rows="1" maxlength="2000" placeholder="询问任何问题" aria-label="消息输入"></textarea>
+    <div class="composer-row">
+      <span class="composer-hint">演示模式 · 回复为本地模拟</span>
+      <button class="send-btn" id="sendBtn" aria-label="发送">↑</button>
+    </div>
+  </div>
+  <p class="composer-note">每次回复附带收据，失败会给出诊断卡。</p>
+</div>
+
+<!-- 模型选择弹窗 -->
+<div class="sheet-scrim" id="sheetScrim"></div>
+<div class="sheet" id="modelSheet" role="dialog" aria-label="选择模型">
+  <div class="sheet-head"><strong>选择模型</strong><button class="icon-btn" id="sheetClose" aria-label="关闭">✕</button></div>
+  <p class="sheet-group">已接入</p>
+  <button class="model-opt on" id="optReal">
+    <span class="mo-main"><strong>Cohere North Mini Code</strong><small>cohere/north-mini-code:free · 上下文 256K</small></span>
+    <span class="tag-free">免费</span><span class="check">✓</span>
+  </button>
+  <p class="sheet-group">尚未接入</p>
+  <button class="model-opt" disabled>
+    <span class="mo-main"><strong>更多模型接入中</strong><small>完成真实接入与测试后开放，暂不公布名称与价格</small></span>
+    <span class="tag-none">未接入</span>
+  </button>
+  <p class="sheet-note">模型不在多，而在说清楚：是否可用、怎么计费、失败了怎么办。</p>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
