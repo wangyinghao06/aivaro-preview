@@ -188,8 +188,9 @@
 
   body.innerHTML =
     '<div class="detail-h' + (isStale(svc) ? ' stale' : '') + '">' +
-      '<h1>' + esc(svc.name) + '</h1>' +
-      '<p class="tag">' + esc(svc.tagline) + '</p>' +
+      '<div class="detail-top">' + logoTileHTML(svc) +
+      '<div class="detail-tt"><h1>' + esc(svc.name) + '</h1>' +
+      '<p class="tag">' + esc(svc.tagline) + '</p></div></div>' +
       '<div class="chips" style="margin-top:12px">' +
         '<span class="chip">' + esc(svc.type) + '</span>' +
         '<span class="chip grey">状态：' + esc(svc.status) + '</span>' +
