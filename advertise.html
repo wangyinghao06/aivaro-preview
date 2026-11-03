@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+<title>广告合作 · Aivaro 导航</title>
+<meta name="description" content="Aivaro 目录首排广告位：席位、定价、轮播规则与标识原则。广告单独成排，不掺入自然列表，不构成平台背书。">
+<link rel="icon" href="assets/brand-icon-32.png">
+<link rel="stylesheet" href="assets/theme.css">
+<script>/* 主题初始化（渲染前执行，避免闪烁）：localStorage 偏好优先，缺省跟随系统 */
+(function(){try{var p=localStorage.getItem('aivaro-theme')||'auto';var d=p==='dark'||(p==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';document.documentElement.dataset.pref=p;}catch(e){document.documentElement.dataset.theme='light';document.documentElement.dataset.pref='auto';}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><span class="brand-tile"><img src="assets/brand-icon.png" alt="Aivaro 品牌图标"></span>Aivaro<small>中转站导航</small></a>
+    <nav class="seg-nav" id="segNav" aria-label="主导航">
+      <a href="index.html" data-nav="index">首页</a>
+      <a href="directory.html" data-nav="directory">目录</a>
+      <a href="free.html" data-nav="free">免费</a>
+      <a href="compare.html" data-nav="compare">比价</a>
+      <a href="about.html" data-nav="about">关于</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="search-btn" id="searchBtn" aria-label="全站搜索，快捷键 Command 加 K">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <span class="sb-label">搜索服务 / 模型</span><kbd>⌘K</kbd>
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="主题切换" title="主题：跟随系统">
+        <svg class="ic-auto" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navSheet">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="sheet" id="navSheet" aria-label="站点导航">
+    <a href="index.html">首页 <span>›</span></a>
+    <a href="directory.html">服务目录 <span>›</span></a>
+    <a href="compare.html">价格对比 <span>›</span></a>
+    <a href="free.html">免费额度 <span>›</span></a>
+    <a href="about.html">收录规范与关于 <span>›</span></a>
+    <a href="submit.html">投稿收录 <span>›</span></a>
+    <a href="advertise.html">广告合作 <span>›</span></a>
+    <hr>
+    <div class="sheet-h">分类</div>
+    <a href="directory.html?cat=free">免费 AI API</a>
+    <a href="directory.html?cat=lowcost">低价 AI API</a>
+    <a href="directory.html?cat=claude">Claude 中转</a>
+    <a href="directory.html?cat=openai">OpenAI 中转</a>
+    <a href="directory.html?cat=gemini">Gemini 中转</a>
+    <a href="directory.html?cat=aggregator">多模型聚合</a>
+    <a href="directory.html?cat=tools">开发工具与资源</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="adv-band">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+      <strong style="font-size:19px;letter-spacing:.04em">AIVARO</strong>
+      <span class="adv-tag">ADVERTISING</span>
+    </div>
+    <h1 style="font-size:28px;line-height:1.35;margin:18px 0 10px">目录第一排，为认真做服务的团队留着。</h1>
+    <p style="color:var(--ink-2);max-width:640px;margin:0">先说清边界：广告位只出售展示位置。自然排序的生成规则对广告主一视同仁地无用——买了位置也挪不动一名；出现在首排也不等于本站认可其服务。选择在这里投放的理由很简单：本站访客正是为比较中转服务的价格、模型与支付方式而来。</p>
+  </div>
+
+  <div class="stat-row"><b><span id="adSeatsTotal">3</span> 个位置</b><span>目录第一排的固定版面，同时最多放 3 家，轮流出现，机会均等；没卖出的位置就空着，不拿假条目凑数</span></div>
+  <div class="stat-row"><b>读者带着问题来</b><span>访问 Aivaro 的人多在做选型：查价格、找免费额度、核对支付与注册要求，广告正好落在他们做比较的现场</span></div>
+  <div class="stat-row"><b>身份写在脸上</b><span>广告卡右上角有「广告」角标，用的是单独一套字段，不借用核实日期、状态、单价这些本站的信任信息，也不混进筛选、排序与收录计数</span></div>
+
+  <section class="blk">
+    <div class="blk-h"><h2>投放流程</h2></div>
+    <div class="steps">
+      <div class="step"><div class="no">01</div><h3>写信申请</h3><p>把站点名称、官网链接和你的联系方式写进邮件，并注明打算投一个月还是一个季度。</p></div>
+      <div class="step"><div class="no">02</div><h3>我们先看官网</h3><p>先确认站点打得开、价格与主体信息摆在明面上；通过后回复空位情况与起止时间。</p></div>
+      <div class="step"><div class="no">03</div><h3>按期上架</h3><p>广告卡进入目录首排展示；在架广告主最多 3 家，轮流出现，机会均等；卡面文字与图片由广告主提供，真实性由其自负。到期自动下线，续投重新确认。</p></div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><h2>席位与定价</h2></div>
+    <div class="price-card">
+      <div style="color:var(--ink-2);font-size:14px">目录第一排 · 按月付费</div>
+      <div class="price-big" style="margin:8px 0">¥<span id="adPriceM">999</span> <span style="font-size:16px;color:var(--ink-3);font-weight:500">/ 月</span></div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:10px 0">
+        <span class="seat-chip" id="adSeatChip">3 席开放</span>
+        <span style="color:var(--ink-2)">按季付 ¥<span id="adPriceQ">2699</span> / 季（一次付清）</span>
+      </div>
+      <p style="color:var(--ink-2);margin:8px 0 16px">同一时段在架广告主上限 3 家，轮流展示；本页价格如有调整，先在此公示再生效，已经确认的订单不受影响。</p>
+      <a class="btn block" id="adApply" href="mailto:lanyangyang060405@gmail.com?subject=%E5%B9%BF%E5%91%8A%E4%BD%8D%E7%94%B3%E8%AF%B7" style="text-align:center">申请广告位 →</a>
+      <p style="text-align:center;color:var(--ink-3);font-size:13.5px;margin:12px 0 0">联系邮箱：<a href="mailto:lanyangyang060405@gmail.com">lanyangyang060405@gmail.com</a></p>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="blk-h"><h2>规矩与下架</h2></div>
+    <div class="std-sec">
+      <ul>
+        <li><strong>收录门槛：</strong>申请方的官网要打得开，主体与价格信息要经得起公开查证；无法核查的申请不予上架；</li>
+        <li><strong>广告的边界：</strong>每张广告卡都挂「广告」角标，广告排位独立于自然列表，筛选与计数都不算它；购买广告位不影响本站对该服务的自然收录评价，也<strong>不构成</strong>本站的推荐或担保，更不能要求删除或修改核实结论；</li>
+        <li><strong>位置之外不作承诺：</strong>我们卖的是固定展示位，访问量、点击与成交都不打包票；</li>
+        <li><strong>出问题先下架：</strong>在架期间若查实广告主存在骗取充值、失联跑路、跳转劫持或冒用他人品牌等行为，我们先<strong>下架</strong>、后通知广告主，并保留拒绝其后续申请的权利；剩余费用的处理方式在确认邮件中事先写明；</li>
+        <li><strong>素材责任：</strong>广告卡上的文字与链接由投放方提供，真实性与合规性由投放方自行承担。</li>
+      </ul>
+      <p>本站收录与商业标注的总规则在<a href="about.html">收录规范与关于</a>第五部分。新服务想被收录请走<a href="submit.html">投稿收录</a>——那是免费通道，与广告位互不相干。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">首页</a><a href="directory.html">服务目录</a><a href="compare.html">价格对比</a><a href="free.html">免费额度</a><a href="about.html">收录规范与关于</a><a href="submit.html">投稿收录</a><a href="advertise.html">广告合作</a><a href="privacy.html">隐私政策</a>
+    </nav>
+    <div class="sub-box" id="subBox" hidden>
+      <form id="subForm" novalidate>
+        <div class="sub-h">订阅本站更新</div>
+        <div class="sub-row">
+          <input type="email" id="subEmail" placeholder="邮箱地址" autocomplete="email" aria-label="订阅邮箱">
+          <button class="btn sm" type="submit">订阅</button>
+        </div>
+        <label class="sub-consent"><input type="checkbox" id="subConsent"> <span>我已阅读并同意<a href="privacy.html">隐私政策</a></span></label>
+        <p class="sub-msg" id="subMsg" role="status"></p>
+        <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
+      </form>
+    </div>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，仅提供服务发现、比较与官网导航，<strong>不提供任何中转服务，不发售 API Key，不经手你的资金</strong>。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>。所有价格与额度以服务商官网为准，本站数据注明核实日期。</p>
+    <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
+  </div>
+</footer>
+
+<script src="assets/analytics.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(async function () {
+  /* 席位与定价从 data/services.json 的 ads 配置读入，改配置即改本页与目录占位 */
+  try {
+    const data = await loadData();
+    const cfg = data.ads || {};
+    const total = cfg.seats_total != null ? cfg.seats_total : 3;
+    const taken = cfg.seats_taken || 0;
+    document.getElementById('adSeatsTotal').textContent = total;
+    document.getElementById('adPriceM').textContent = cfg.price_monthly != null ? cfg.price_monthly : 999;
+    document.getElementById('adPriceQ').textContent = cfg.price_quarterly != null ? cfg.price_quarterly : 2699;
+    document.getElementById('adSeatChip').textContent = (total - taken) + ' / ' + total + ' 席开放';
+    const body = ['站点名称：', '官网地址：', '计划投放周期：（月度 / 季度）', '联系方式：'].join('\n');
+    document.getElementById('adApply').href =
+      'mailto:lanyangyang060405@gmail.com?subject=' + encodeURIComponent('广告位申请') +
+      '&body=' + encodeURIComponent(body);
+  } catch (e) { /* 配置读取失败时保留页面内置默认值 */ }
+})();
+</script>
+</body>
+</html>

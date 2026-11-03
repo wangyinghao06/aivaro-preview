@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+<title>服务目录 · Aivaro 导航</title>
+<meta name="description" content="按模型家族、价格、免费额度、支付方式、API 格式、服务状态与运营类型筛选 AI 中转与聚合服务。">
+<link rel="icon" href="assets/brand-icon-32.png">
+<link rel="stylesheet" href="assets/theme.css">
+<script>/* 主题初始化（渲染前执行，避免闪烁）：localStorage 偏好优先，缺省跟随系统 */
+(function(){try{var p=localStorage.getItem('aivaro-theme')||'auto';var d=p==='dark'||(p==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.dataset.theme=d?'dark':'light';document.documentElement.dataset.pref=p;}catch(e){document.documentElement.dataset.theme='light';document.documentElement.dataset.pref='auto';}})();
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html"><span class="brand-tile"><img src="assets/brand-icon.png" alt="Aivaro 品牌图标"></span>Aivaro<small>中转站导航</small></a>
+    <nav class="seg-nav" id="segNav" aria-label="主导航">
+      <a href="index.html" data-nav="index">首页</a>
+      <a href="directory.html" data-nav="directory">目录</a>
+      <a href="free.html" data-nav="free">免费</a>
+      <a href="compare.html" data-nav="compare">比价</a>
+      <a href="about.html" data-nav="about">关于</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="search-btn" id="searchBtn" aria-label="全站搜索，快捷键 Command 加 K">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.8-3.8"/></svg>
+        <span class="sb-label">搜索服务 / 模型</span><kbd>⌘K</kbd>
+      </button>
+      <button class="theme-btn" id="themeBtn" aria-label="主题切换" title="主题：跟随系统">
+        <svg class="ic-auto" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+        <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
+      </button>
+      <button class="menu-btn" id="menuBtn" aria-label="打开导航菜单" aria-expanded="false" aria-controls="navSheet">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="sheet" id="navSheet" aria-label="站点导航">
+    <a href="index.html">首页 <span>›</span></a>
+    <a href="directory.html">服务目录 <span>›</span></a>
+    <a href="compare.html">价格对比 <span>›</span></a>
+    <a href="free.html">免费额度 <span>›</span></a>
+    <a href="about.html">收录规范与关于 <span>›</span></a>
+    <a href="submit.html">投稿收录 <span>›</span></a>
+    <a href="advertise.html">广告合作 <span>›</span></a>
+    <hr>
+    <div class="sheet-h">分类</div>
+    <a href="directory.html?cat=free">免费 AI API</a>
+    <a href="directory.html?cat=lowcost">低价 AI API</a>
+    <a href="directory.html?cat=claude">Claude 中转</a>
+    <a href="directory.html?cat=openai">OpenAI 中转</a>
+    <a href="directory.html?cat=gemini">Gemini 中转</a>
+    <a href="directory.html?cat=aggregator">多模型聚合</a>
+    <a href="directory.html?cat=tools">开发工具与资源</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <div class="page-h">
+    <h1 id="pageTitle">服务目录</h1>
+    <p id="pageDesc">全部收录服务。筛选均为多选：同一维度内多选是「或」，跨维度是「且」；价格档按已核实的美元最低输入价划分，未核实到价格的服务单独成档。没找到想收录的服务？<a href="submit.html">投稿收录</a>；服务商合作见<a href="advertise.html">广告合作</a>。</p>
+  </div>
+
+  <div class="preset-note" id="presetNote" hidden>
+    <span>当前分类：</span><span class="chip" id="presetChip"></span>
+    <a href="directory.html">清除分类，看全部</a>
+  </div>
+
+  <div class="dir-search" style="margin-top:16px">
+    <input type="search" id="fQ" placeholder="搜索服务名、厂商或模型…" aria-label="关键词搜索">
+  </div>
+
+  <button type="button" class="filter-toggle-btn" id="filterToggle" aria-expanded="false" aria-controls="filterBar">筛选 <span class="ft-badge" id="filterBadge" hidden></span><span aria-hidden="true">▾</span></button>
+  <div class="filter-bar" id="filterBar" aria-label="筛选条件"></div>
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <p class="note" style="margin:0">排序与收录口径见<a href="about.html">收录规范</a>；首排广告位单独成排，不掺入下面的自然列表，也不计入下方计数。「官网可打开」仅代表核实当天该官网可正常打开，不代表服务质量、稳定性或资金安全。</p>
+  </div>
+
+  <div class="active-chips" id="activeChips" hidden></div>
+  <p class="result-line" id="resultLine" role="status"></p>
+  <div class="ad-row" id="adRow" hidden></div>
+  <div class="grid" id="dirGrid"></div>
+  <div class="empty" id="dirEmpty" hidden>没有符合全部条件的服务。试着移除一个已选条件，或清空关键词。</div>
+  <div class="loadmore" id="loadMoreWrap" hidden><button class="btn ghost" type="button" id="loadMoreBtn">加载更多</button></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav>
+      <a href="index.html">首页</a><a href="directory.html">服务目录</a><a href="compare.html">价格对比</a><a href="free.html">免费额度</a><a href="about.html">收录规范与关于</a><a href="submit.html">投稿收录</a><a href="advertise.html">广告合作</a><a href="privacy.html">隐私政策</a>
+    </nav>
+    <div class="sub-box" id="subBox" hidden>
+      <form id="subForm" novalidate>
+        <div class="sub-h">订阅本站更新</div>
+        <div class="sub-row">
+          <input type="email" id="subEmail" placeholder="邮箱地址" autocomplete="email" aria-label="订阅邮箱">
+          <button class="btn sm" type="submit">订阅</button>
+        </div>
+        <label class="sub-consent"><input type="checkbox" id="subConsent"> <span>我已阅读并同意<a href="privacy.html">隐私政策</a></span></label>
+        <p class="sub-msg" id="subMsg" role="status"></p>
+        <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
+      </form>
+    </div>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，仅提供服务发现、比较与官网导航，<strong>不提供任何中转服务，不发售 API Key，不经手你的资金</strong>。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>。所有价格与额度以服务商官网为准，本站数据注明核实日期。</p>
+    <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
+  </div>
+</footer>
+
+<script src="assets/analytics.js"></script>
+<script src="assets/common.js"></script>
+<script>
+(async function () {
+  const data = await loadData();
+  const services = data.services;
+  const newIds = newIdSet(services, data.meta.verified_at);
+  const params = new URLSearchParams(location.search);
+  const cat = params.get('cat') || '';
+  const catDef = CATEGORIES.find(c => c.id === cat);
+  const PAGE = 6;
+  let visibleCount = PAGE;
+
+  if (catDef) {
+    document.getElementById('pageTitle').textContent = catDef.name;
+    document.getElementById('pageDesc').textContent = catDef.desc + '——以下为该分类下的收录服务，仍可叠加其它筛选条件。';
+    document.title = catDef.name + ' · Aivaro 导航';
+    document.getElementById('presetNote').hidden = false;
+    document.getElementById('presetChip').textContent = catDef.name;
+  }
+
+  const $ = id => document.getElementById(id);
+  const state = {
+    q: params.get('q') || '',
+    families: new Set(), bands: new Set(), free: new Set(),
+    pays: new Set(), formats: new Set(), statuses: new Set(), ops: new Set(),
+    sort: 'reco', view: 'grid',
+  };
+  if (state.q) $('fQ').value = state.q;
+  if (params.get('sort') === 'verified') state.sort = 'verified';
+
+  /* 维度定义：值、标签、计数、匹配函数 */
+  const count = fn => services.filter(fn).length;
+  const bandOf = s => {
+    const m = minUsdInput(s);
+    if (m === null) return 'unknown';
+    if (m <= 0.5) return 'budget';
+    if (m <= 2.5) return 'mid';
+    return 'premium';
+  };
+  const DIMS = [
+    { key: 'families', title: '模型家族', values: () => {
+        const present = new Set(); services.forEach(s => familiesOf(s).forEach(f => present.add(f)));
+        return FAMILY_ORDER.filter(f => present.has(f)).map(f => ({ v: f, label: f }));
+      },
+      match: (s, set) => familiesOf(s).some(f => set.has(f)) },
+    { key: 'bands', title: '价格档', values: () => [
+        { v: 'budget', label: '低价（≤ $0.5）' }, { v: 'mid', label: '中价（$0.5 – $2.5）' },
+        { v: 'premium', label: '高价（> $2.5）' }, { v: 'unknown', label: '价格待核实' }],
+      match: (s, set) => set.has(bandOf(s)) },
+    { key: 'free', title: '免费额度', values: () => [
+        { v: 'yes', label: '有免费额度 / 免费模型' }, { v: 'unknown', label: '免费政策待核实' }],
+      match: (s, set) => {
+        const has = s.free_quota ? s.free_quota.has : null;
+        return (set.has('yes') && has === true) || (set.has('unknown') && has === null);
+      } },
+    { key: 'pays', title: '支付方式', values: () =>
+        Array.from(new Set(services.flatMap(s => s.payments || []))).sort()
+          .map(v => ({ v, label: v })),
+      match: (s, set) => (s.payments || []).some(p => set.has(p)) },
+    { key: 'formats', title: 'API 格式', values: () =>
+        Array.from(new Set(services.flatMap(s => s.api_formats || []))).sort()
+          .map(v => ({ v, label: v })),
+      match: (s, set) => (s.api_formats || []).some(p => set.has(p)) },
+    { key: 'statuses', title: '服务状态', values: () =>
+        Array.from(new Set(services.map(s => s.status))).sort().map(v => ({ v, label: v })),
+      match: (s, set) => set.has(s.status) },
+    { key: 'ops', title: '运营类型', values: () =>
+        Array.from(new Set(services.map(s => s.op_type || s.type))).sort().map(v => ({ v, label: v })),
+      match: (s, set) => set.has(s.op_type || s.type) },
+  ];
+
+  /* 渲染下拉筛选组＋排序＋视图切换 */
+  $('filterBar').innerHTML = DIMS.map(dim =>
+    '<div class="dd" data-dd="' + dim.key + '">' +
+      '<button type="button" class="dd-btn" aria-expanded="false" aria-haspopup="true">' + esc(dim.title) +
+      ' <span class="cnt-badge" data-badge="' + dim.key + '" hidden></span><span class="car" aria-hidden="true">▾</span></button>' +
+      '<div class="dd-panel" hidden><div class="opts">' +
+      dim.values().map(o => {
+        const n = count(s => dim.match(s, new Set([o.v])));
+        return '<label class="chk"><input type="checkbox" data-dim="' + dim.key + '" value="' + esc(o.v) + '">' +
+          esc(o.label) + '<span class="cnt">' + n + '</span></label>';
+      }).join('') + '</div>' +
+      '<button type="button" class="dd-clear" data-clear="' + dim.key + '">清空本组</button></div>' +
+    '</div>'
+  ).join('') +
+    '<select class="sort-sel" id="fSort" aria-label="排序方式">' +
+      '<option value="reco">默认排序（综合）</option>' +
+      '<option value="price">价格低 → 高</option>' +
+      '<option value="verified">最近核实</option>' +
+      '<option value="name">名称</option>' +
+    '</select>' +
+    '<div class="view-toggle" role="group" aria-label="视图切换">' +
+      '<button type="button" id="viewGrid" aria-pressed="true" aria-label="宫格视图"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/></svg></button>' +
+      '<button type="button" id="viewList" aria-pressed="false" aria-label="列表视图"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg></button>' +
+    '</div>';
+  $('fSort').value = state.sort;
+
+  /* 下拉开合：同时只开一个，点外/Esc 关闭 */
+  const closeAllPanels = () => {
+    document.querySelectorAll('.dd-panel').forEach(p => { p.hidden = true; });
+    document.querySelectorAll('.dd-btn').forEach(b => b.setAttribute('aria-expanded', 'false'));
+  };
+  $('filterBar').addEventListener('click', e => {
+    const btn = e.target.closest('.dd-btn');
+    if (btn) {
+      const panel = btn.parentElement.querySelector('.dd-panel');
+      const willOpen = panel.hidden;
+      closeAllPanels();
+      if (willOpen) { panel.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+      return;
+    }
+    const clr = e.target.closest('[data-clear]');
+    if (clr) {
+      const key = clr.dataset.clear;
+      state[key].clear();
+      clr.closest('.dd-panel').querySelectorAll('input[type=checkbox]').forEach(cb => { cb.checked = false; });
+      visibleCount = PAGE;
+      render();
+    }
+  });
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.dd') && !e.target.closest('#filterBar')) closeAllPanels();
+    else if (!e.target.closest('.dd')) closeAllPanels();
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAllPanels(); });
+
+  $('filterBar').addEventListener('change', e => {
+    const cb = e.target.closest('input[type=checkbox][data-dim]');
+    if (!cb) return;
+    const set = state[cb.dataset.dim];
+    if (cb.checked) set.add(cb.value); else set.delete(cb.value);
+    visibleCount = PAGE;
+    render();
+  });
+
+  function matches(s) {
+    if (catDef && !(s.categories || []).includes(catDef.id)) return false;
+    if (state.q) {
+      const q = state.q.trim().toLowerCase();
+      if (q && !searchHay(s).includes(q)) return false;
+    }
+    return DIMS.every(dim => {
+      const set = state[dim.key];
+      return !set.size || dim.match(s, set);
+    });
+  }
+
+  function sortList(list) {
+    const arr = list.slice();
+    if (state.sort === 'reco') arr.sort(compositeCompare);
+    else if (state.sort === 'price') arr.sort((a, b) => {
+      const x = minUsdInput(a), y = minUsdInput(b);
+      const ab = isAbnormal(a) ? 1 : 0, bb = isAbnormal(b) ? 1 : 0;
+      if (ab !== bb) return ab - bb;
+      if (x === null && y === null) return a.name.localeCompare(b.name, 'zh');
+      if (x === null) return 1; if (y === null) return -1;
+      return x - y;
+    });
+    else if (state.sort === 'verified') arr.sort((a, b) => b.verified_at.localeCompare(a.verified_at) || a.name.localeCompare(b.name, 'zh'));
+    else if (state.sort === 'name') arr.sort((a, b) => a.name.localeCompare(b.name, 'zh'));
+    /* 时效降权：过期条目整体沉底（稳定排序，组内相对顺序不变） */
+    arr.sort((a, b) => (isStale(a) ? 1 : 0) - (isStale(b) ? 1 : 0));
+    return arr;
+  }
+
+  function activeCount() {
+    return DIMS.reduce((n, d) => n + state[d.key].size, 0) + (state.q ? 1 : 0);
+  }
+  function anyFilterActive() { return activeCount() > 0 || !!catDef; }
+
+  function renderBadges() {
+    DIMS.forEach(dim => {
+      const b = document.querySelector('[data-badge="' + dim.key + '"]');
+      if (!b) return;
+      const n = state[dim.key].size;
+      b.hidden = n === 0;
+      b.textContent = n;
+    });
+  }
+
+  function renderChips() {
+    const chips = [];
+    if (state.q) chips.push({ dim: 'q', v: state.q, label: '关键词：' + state.q });
+    DIMS.forEach(dim => {
+      dim.values().forEach(o => {
+        if (state[dim.key].has(o.v)) chips.push({ dim: dim.key, v: o.v, label: dim.title + '：' + o.label });
+      });
+    });
+    const box = $('activeChips');
+    if (!chips.length) { box.hidden = true; box.innerHTML = ''; }
+    else {
+      box.hidden = false;
+      box.innerHTML = '<span class="ac-h">已选条件</span>' + chips.map((c, i) =>
+        '<span class="fchip">' + esc(c.label) +
+        '<button type="button" data-chip="' + i + '" aria-label="移除条件 ' + esc(c.label) + '">×</button></span>'
+      ).join('') + '<button class="clear-all" type="button" id="clearAll">清空全部</button>';
+      box.querySelectorAll('[data-chip]').forEach(btn => btn.addEventListener('click', () => {
+        const c = chips[Number(btn.dataset.chip)];
+        if (c.dim === 'q') { state.q = ''; $('fQ').value = ''; }
+        else {
+          state[c.dim].delete(c.v);
+          const cb = document.querySelector('.dd-panel input[data-dim="' + c.dim + '"][value="' + CSS.escape(c.v) + '"]');
+          if (cb) cb.checked = false;
+        }
+        visibleCount = PAGE;
+        render();
+      }));
+      const ca = $('clearAll');
+      if (ca) ca.addEventListener('click', clearAll);
+    }
+  }
+
+  function clearAll() {
+    DIMS.forEach(d => state[d.key].clear());
+    state.q = ''; $('fQ').value = '';
+    document.querySelectorAll('.dd-panel input[type=checkbox]').forEach(cb => { cb.checked = false; });
+    visibleCount = PAGE;
+    render();
+  }
+
+  function renderAds() {
+    const row = $('adRow');
+    /* 广告排只出现在无筛选的默认视图：不参与筛选、排序与计数 */
+    if (anyFilterActive() || state.sort !== 'reco') { row.hidden = true; row.innerHTML = ''; return; }
+    const html = adRowHTML(data);
+    row.innerHTML = html;
+    row.hidden = !html;
+  }
+
+  const ftBtn = $('filterToggle'), ftBadge = $('filterBadge');
+  if (ftBtn) ftBtn.addEventListener('click', () => {
+    const open = $('filterBar').classList.toggle('open');
+    ftBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  function render() {
+    const list = sortList(services.filter(matches));
+    const shown = list.slice(0, visibleCount);
+    $('dirGrid').innerHTML = shown.map(s => cardHTML(s, { newIds })).join('');
+    $('dirEmpty').hidden = list.length > 0;
+    $('resultLine').textContent = '全部收录 ' + services.length + ' 家 · 当前符合 ' + list.length + ' 家' +
+      (list.length > shown.length ? ' · 已显示 ' + shown.length + ' 家' : '');
+    const more = $('loadMoreWrap');
+    if (list.length > visibleCount) {
+      more.hidden = false;
+      $('loadMoreBtn').textContent = '加载更多（还有 ' + (list.length - visibleCount) + ' 家）';
+    } else more.hidden = true;
+    renderBadges();
+    renderChips();
+    if (ftBadge) { const ac = activeCount(); ftBadge.hidden = ac === 0; ftBadge.textContent = ac; }
+    renderAds();
+  }
+
+  $('fQ').addEventListener('input', () => { state.q = $('fQ').value; visibleCount = PAGE; render(); });
+  $('fSort').addEventListener('change', () => { state.sort = $('fSort').value; render(); });
+  $('loadMoreBtn').addEventListener('click', () => { visibleCount += PAGE; render(); });
+  $('viewGrid').addEventListener('click', () => {
+    state.view = 'grid';
+    $('dirGrid').classList.remove('list-view');
+    $('viewGrid').setAttribute('aria-pressed', 'true');
+    $('viewList').setAttribute('aria-pressed', 'false');
+  });
+  $('viewList').addEventListener('click', () => {
+    state.view = 'list';
+    $('dirGrid').classList.add('list-view');
+    $('viewGrid').setAttribute('aria-pressed', 'false');
+    $('viewList').setAttribute('aria-pressed', 'true');
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

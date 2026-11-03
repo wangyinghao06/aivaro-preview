@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /go.html
+Disallow: /stats.html
+Disallow: /tools/

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>正在前往官网 · Aivaro 导航</title>
+<link rel="icon" href="assets/brand-icon-32.png">
+<link rel="stylesheet" href="assets/theme.css">
+</head>
+<body>
+<main class="wrap" style="padding:64px 20px">
+  <p style="font-size:17px">正在前往 <strong id="goDomain">官网</strong> …</p>
+  <p style="color:var(--ink-2);font-size:14px">目标站点：<span id="goDomainText">—</span></p>
+  <p style="color:var(--ink-2);font-size:14px">若没有自动跳转，请点 <a id="goManual" href="directory.html">这里继续前往</a>；点错了可以<a href="directory.html">返回目录</a>。</p>
+  <p style="color:var(--ink-3);font-size:13px">你正在离开 Aivaro 前往第三方站点，注册、充值与使用均发生在对方站点，请自行核对条款。</p>
+</main>
+<script src="assets/analytics.js"></script>
+<script>
+'use strict';
+/* 官网跳转统一出口（加固口径）：
+ * - 只接受 id 参数；白名单 = data/services.json 内的服务 id 集合，查不到回目录页；
+ * - 不接受任何 URL 直传参数：url / target 等一律忽略，目标只来自数据文件；
+ * - 跳转前经 sendEvent 记录一次 click_out（预留统计，当前仅本地缓冲）。 */
+const ENABLE_UTM_PASSTHROUGH = false; // 推广参数透传位点（预留，本轮不启用）：启用时把本页 URL 的 utm_* 参数拼到目标地址
+(async function () {
+  const back = () => location.replace('directory.html');
+  const id = new URLSearchParams(location.search).get('id') || '';
+  if (!id) return back();
+  let svc = null;
+  try {
+    const res = await fetch('data/services.json');
+    if (!res.ok) return back();
+    const data = await res.json();
+    svc = (data.services || []).find(s => s.id === id);
+  } catch (e) { return back(); }
+  if (!svc || !svc.website) return back();
+  let target = svc.website;
+  try { // 目标域名可见显示（跳转前短暂可见，也是兜底页的信息）
+    const host = new URL(target).hostname.replace(/^www\./, '');
+    document.getElementById('goDomain').textContent = host;
+    document.getElementById('goDomainText').textContent = host;
+  } catch (e) {}
+  if (ENABLE_UTM_PASSTHROUGH) { /* 预留：utm_* 透传在此拼接，本轮不启用 */ }
+  document.getElementById('goManual').href = target;
+  sendEvent('click_out', { page: 'go.html', service_id: svc.id });
+  location.replace(target);
+})();
+</script>
+</body>
+</html>
