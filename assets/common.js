@@ -30,13 +30,33 @@ function familiesOf(svc) {
   return FAMILY_ORDER.filter(f => set.has(f));
 }
 
+/* 服务商站点图标（本站自托管的 data URI 映射，采集自各站官网自身声明的 icon）：
+   与数据并行取；文件缺失/取不到/条目缺失一律降级为字母块，行为与无图标时一致。 */
+let ICONS = {};
+const _iconsPromise = fetch('assets/icons.json')
+  .then(res => (res.ok ? res.json() : {}))
+  .catch(() => ({}))
+  .then(map => { ICONS = map || {}; return ICONS; });
+
+function logoTileHTML(svc) {
+  const initial = esc(String(svc.name || '?').trim().charAt(0).toUpperCase());
+  const icon = ICONS[svc && svc.id];
+  if (!icon) return '<span class="logo-tile" aria-hidden="true">' + initial + '</span>';
+  return '<span class="logo-tile has-icon" aria-hidden="true">' +
+    '<span class="logo-letter">' + initial + '</span>' +
+    '<img class="logo-img" src="' + icon + '" alt="" loading="lazy" ' +
+    'onerror="this.parentNode.classList.remove(\'has-icon\');this.remove()"></span>';
+}
+
 let _dataPromise = null;
 function loadData() {
   if (!_dataPromise) {
-    _dataPromise = fetch('data/services.json').then(res => {
+    const dataP = fetch('data/services.json').then(res => {
       if (!res.ok) throw new Error('数据加载失败: ' + res.status);
       return res.json();
     });
+    /* 等图标映射就绪后再交数据给渲染层（图标失败不阻塞、不报错） */
+    _dataPromise = Promise.all([dataP, _iconsPromise]).then(([data]) => data);
   }
   return _dataPromise;
 }
@@ -147,9 +167,8 @@ function cardHTML(svc, opts) {
       svc.payments.map(p => '<span class="pay">' + esc(p) + '</span>').join('') + '</div>'
     : (svc.type === '导航站' ? '' : '<div class="payrow"><span class="payrow-h">支付</span><span>支付方式待核实</span></div>');
   const metaInner = priceLine + topupLine + payRow;
-  const initial = esc(String(svc.name || '?').trim().charAt(0).toUpperCase());
   return '<article class="card' + (isStale(svc) ? ' stale' : '') + '">' +
-    '<div class="card-top"><span class="logo-tile" aria-hidden="true">' + initial + '</span>' +
+    '<div class="card-top">' + logoTileHTML(svc) +
     '<div class="card-id"><h3><a href="detail.html?id=' + encodeURIComponent(svc.id) + '">' + esc(svc.name) + '</a></h3>' +
     '<div class="domain">' + esc(hostOf(svc.website)) + ' · ' + esc(svc.op_type || svc.type) + '</div></div>' +
     (topupShort ? '<span class="topup">' + esc(topupShort) + '</span>' : '') + '</div>' +

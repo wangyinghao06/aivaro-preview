@@ -106,9 +106,9 @@ img{display:block}
 
 section.blk{padding:30px 0 6px}
 .blk-h{display:flex; align-items:baseline; gap:12px; margin-bottom:16px}
-.blk-h h2{font-size:21px; margin:0; font-weight:750}
+.blk-h h2{font-size:21px; margin:0; font-weight:750; flex:none}
 .blk-h span{color:var(--ink-3); font-size:13px}
-.blk-h a{margin-left:auto; font-size:14px}
+.blk-h a{margin-left:auto; font-size:14px; flex:none; white-space:nowrap}
 
 /* 服务卡片 */
 .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px}
@@ -704,3 +704,17 @@ table.cmp tr.best td{background:rgba(34,197,94,.08)}
 .stale-badge{display:inline-block; font-size:12px; font-weight:700; color:var(--ink-2); border:1px solid var(--line); border-radius:2px; padding:2px 8px; margin-left:8px; background:var(--chip); vertical-align:2px}
 .stale-tag{display:inline-block; font-size:11.5px; color:var(--ink-2); border:1px dashed var(--line); border-radius:2px; padding:1px 6px}
 .src-type{display:inline-block; font-size:11.5px; color:var(--ink-2); border:1px solid var(--line); border-radius:2px; padding:1px 6px; margin-right:8px; white-space:nowrap}
+
+/* ===== 服务商站点图标（真实 icon 接入；无图标/加载失败回退字母块） ===== */
+.logo-tile{position:relative; overflow:hidden}
+.logo-tile .logo-letter{display:flex; align-items:center; justify-content:center; width:100%; height:100%}
+.logo-tile .logo-img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:var(--wash); padding:5px; box-sizing:border-box}
+.detail-top{display:flex; gap:14px; align-items:flex-start}
+.detail-top .logo-tile{width:54px; height:54px; font-size:25px; margin-top:2px}
+.detail-tt{min-width:0}
+
+/* ===== 区块标题行：手机端换行堆叠，避免标题/说明/链接挤压叠字（桌面不变） ===== */
+@media (max-width:640px){
+  .blk-h{flex-wrap:wrap; row-gap:4px}
+  .blk-h>span{flex:1 1 100%; order:3}
+}
