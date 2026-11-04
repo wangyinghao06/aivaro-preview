@@ -77,11 +77,13 @@ img{display:block}
 }
 .hero h1{position:relative; font-size:34px; line-height:1.3; margin:0 0 10px; font-weight:800; letter-spacing:.2px}
 .hero p.lede{position:relative; color:var(--ink-2); font-size:16px; margin:0 0 26px; max-width:640px}
-.bigsearch{position:relative; display:flex; gap:10px; max-width:680px}
+.bigsearch{position:relative; display:flex; gap:10px; max-width:720px}
 .bigsearch input{
-  flex:1; height:54px; border-radius:2px; border:1px solid var(--line);
-  padding:0 18px; font-size:16px; color:var(--ink); background:#fff;
+  flex:1; height:62px; border-radius:2px; border:2px solid var(--ink-2);
+  padding:0 18px; font-size:17px; color:var(--ink); background:#fff;
 }
+.bigsearch input::placeholder{color:var(--ink-3)}
+.bigsearch .btn{height:62px}
 .bigsearch input:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent}
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
@@ -222,6 +224,7 @@ footer nav a{color:var(--ink-2)}
   .hero{padding:44px 0 30px}
   .hero h1{font-size:27px}
   .bigsearch{flex-direction:column}
+  .bigsearch input{flex:none} /* 纵向 flex 下 flex:1 的 basis 会压掉 height，须解除（2026-11-04 断言 h=24 抓到） */
   .bigsearch .btn{width:100%}
   .grid{grid-template-columns:1fr}
   .latest .lt{display:none}
@@ -491,6 +494,15 @@ table.cmp tr.best td{background:rgba(34,197,94,.08)}
 .seg button[aria-pressed=true]{background:var(--solid); color:var(--solid-ink); box-shadow:none}
 .badge.rec,.badge.new{background:var(--solid); color:var(--solid-ink)}
 .badge.bonus{background:rgba(245,158,11,.15); color:var(--warn)}
+.badge.fkind{background:var(--wash); color:var(--ink-2); border:1px solid var(--line)}
+.badge.disc{background:rgba(59,130,246,.12); color:#3b82f6; border:1px solid rgba(59,130,246,.35)}
+.badge.tier{background:var(--wash); color:var(--ink-2); border:1px solid var(--line)}
+.badge.tier.abn{background:rgba(220,38,38,.10); color:var(--err); border:1px solid rgba(220,38,38,.35)}
+.abn-tag{color:var(--err); font-size:12px; margin-top:2px}
+.tier-line{color:var(--ink-3); font-size:12px}
+.tier-line.abn{color:var(--err)}
+.fkind-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
+.cat .cat-sub{display:block; font-size:12px; color:var(--ink-3); margin-top:6px}
 .badge.nav{background:rgba(245,158,11,.15); color:var(--warn)}
 .badge.com{background:rgba(220,38,38,.10); color:var(--err)}
 .badge.ok{background:rgba(34,197,94,.12); color:var(--ok)}
@@ -526,7 +538,6 @@ table.cmp tr.best td{background:rgba(34,197,94,.08)}
 /* —— 首页：去掉极光，回到扁平底 —— */
 .hero::before{display:none}
 .hero{padding:48px 0 32px}
-.submit-cta{margin:0 0 18px; max-width:680px}
 
 /* —— 卡片行序：方形 Logo 位＋名称/域名＋起充右对齐 → 简介 → 模型 → 标签 → 支付/价格 → 状态与绿分段条 → 双按钮 —— */
 .logo-tile{
@@ -720,4 +731,11 @@ table.cmp tr.best td{background:rgba(34,197,94,.08)}
 @media (max-width:640px){
   .blk-h{flex-wrap:wrap; row-gap:4px}
   .blk-h>span{flex:1 1 100%; order:3}
+}
+
+/* 手机端导航去重（2026-11-04）：≤640px 时顶栏分段导航整行平铺、已覆盖全部栏目，
+   再叠加 ≡ 抽屉触发按钮属重复入口，隐藏之；抽屉内的分类/投稿/广告经页脚直达。
+   641–900px 与桌面端保持原样（分段导航与抽屉并存）。 */
+@media (max-width: 640px){
+  .menu-btn{display:none}
 }

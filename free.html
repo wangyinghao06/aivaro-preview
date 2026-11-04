@@ -91,7 +91,7 @@
         <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
       </form>
     </div>
-    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，仅提供服务发现、比较与官网导航，<strong>不提供任何中转服务，不发售 API Key，不经手你的资金</strong>。免费额度由各服务商提供并可随时变更，本站只负责如实记录核实结论，领取与使用均发生在第三方站点。</p>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。免费额度由各服务商提供并可随时变更，本站只负责如实记录核实结论，领取与使用均发生在第三方站点。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -114,7 +114,8 @@
   document.getElementById('freeList').innerHTML = withFree.map(s =>
     '<article class="free-row">' +
       '<h3><a href="detail.html?id=' + encodeURIComponent(s.id) + '">' + esc(s.name) + '</a></h3>' +
-      '<div class="free-quota">' + esc(s.free_quota.text) + '</div>' + freeStaleTagHTML(s) +
+      '<div class="free-quota">' + esc(s.free_quota.text) + '</div>' +
+      (freeKindBadgesHTML(s) ? '<div class="fkind-row">' + freeKindBadgesHTML(s) + '</div>' : '') + freeStaleTagHTML(s) +
       '<div class="free-meta">' +
         '<span>' + statusDot(s) + ' ' + esc(s.status) + '</span>' +
         '<span>核实日期：' + esc(s.verified_at) + '</span>' +

@@ -181,14 +181,28 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "limited"
+   ],
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "added_at": "2026-10-20",
    "api_formats": null,
    "categories": [
     "free",
-    "lowcost",
     "aggregator"
    ],
    "cons": [
@@ -287,7 +301,11 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "long_term",
+    "signup_credit"
+   ]
   },
   {
    "added_at": "2026-10-24",
@@ -402,13 +420,16 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "long_term"
+   ]
   },
   {
    "added_at": "2026-10-27",
    "api_formats": null,
    "categories": [
-    "lowcost",
+    "discount_labeled",
     "claude",
     "openai",
     "gemini",
@@ -430,6 +451,7 @@
     "text": null
    },
    "id": "302ai",
+   "pricing_basis": "self_labeled",
    "intro": "定位企业级的 AI 资源平台，除全模型 API 外还有大量在线 AI 应用。它的价格公示方式很直接：首页就挂出逐模型的美元价，并设有打折的特价专区。",
    "min_topup": null,
    "model_count": null,
@@ -551,13 +573,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "added_at": "2026-10-30",
    "api_formats": null,
    "categories": [
-    "lowcost",
     "claude",
     "aggregator"
    ],
@@ -577,6 +605,7 @@
     "text": null
    },
    "id": "jiekou",
+   "pricing_basis": "anchor",
    "intro": "一站式多模型中转平台，本轮核实时其首页以 Claude 系列为主力陈列，逐模型标出输入、输出与缓存读写价格，个别模型同时标出原价与折后价。",
    "min_topup": null,
    "model_count": null,
@@ -677,7 +706,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.95,
+     "output_ratio": 0.95,
+     "ratio": 0.95
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "added_at": "2026-10-29",
@@ -782,7 +824,10 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "limited"
+   ]
   },
   {
    "added_at": "2026-11-02",
@@ -993,7 +1038,6 @@
     "Gemini 原生"
    ],
    "categories": [
-    "lowcost",
     "claude",
     "openai",
     "gemini",
@@ -1255,7 +1299,10 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "signup_credit"
+   ]
   },
   {
    "added_at": "2026-11-03",
@@ -1265,7 +1312,6 @@
     "Gemini"
    ],
    "categories": [
-    "lowcost",
     "claude",
     "openai",
     "gemini",
@@ -1414,6 +1460,7 @@
     }
    ],
    "id": "openmodel",
+   "pricing_basis": "anchor",
    "intro": "托管式的多模型 API 网关，一个 Key 接入全部模型，兼容 Anthropic、OpenAI、Gemini 与图像四类协议。官网设有公开价目页（逐模型标价）和活动页，失败请求默认不收费、用量日志可逐条对账。",
    "is_commercial": false,
    "min_topup": null,
@@ -1494,7 +1541,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.4,
+     "output_ratio": 0.4,
+     "ratio": 0.4
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "added_at": "2026-11-03",
@@ -1582,14 +1637,17 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "signup_credit"
+   ]
   },
   {
    "added_at": "2026-11-03",
    "api_formats": null,
    "categories": [
     "free",
-    "lowcost"
+    "discount_labeled"
    ],
    "cons": [
     {
@@ -1613,6 +1671,7 @@
     }
    ],
    "id": "longcat",
+   "pricing_basis": "self_labeled",
    "intro": "美团自研 LongCat 大模型的官方 API 开放平台，按量付费与 Token 资源包两种计费并行。官方文档逐项公示单价（含缓存价与原价/折扣价对照），更新日志里载明平台提供每日免费额度。",
    "is_commercial": false,
    "min_topup": null,
@@ -1686,14 +1745,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "free_kinds": [
+    "long_term"
+   ]
   },
   {
    "added_at": "2026-11-03",
    "api_formats": null,
-   "categories": [
-    "lowcost"
-   ],
+   "categories": [],
    "cons": [
     {
      "basis": "官方更新日志",
@@ -1897,8 +1957,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free"
+    "gemini"
    ],
    "vendors": [
     "DeepSeek",
@@ -1925,8 +1984,8 @@
    "prices": [],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 87 个零价/免费模型（如 mj_turbo_shorten），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2001,9 +2060,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "OpenAI",
@@ -2068,8 +2125,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 190 个零价/免费模型（如 gemini-3-pro-image-preview-4k），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2137,7 +2194,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "open-xiaojingai-com",
@@ -2151,9 +2220,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Google",
@@ -2204,8 +2271,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 25 个零价/免费模型（如 MiniMax-H3-open），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2255,7 +2322,14 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "s-lconai-com",
@@ -2269,9 +2343,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Moonshot",
@@ -2322,8 +2394,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 135 个零价/免费模型（如 cs-gemini-3-pro-all），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2373,7 +2445,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.5,
+     "output_ratio": 1.5,
+     "ratio": 1.5
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.5,
+     "output_ratio": 1.5,
+     "ratio": 1.5
+    }
+   }
   },
   {
    "id": "api-xty-app",
@@ -2387,9 +2471,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Qwen",
@@ -2453,8 +2535,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 44 个零价/免费模型（如 flux.2-flex），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": [
     "淘宝下单",
@@ -2519,7 +2601,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 3.0,
+     "output_ratio": 3.0,
+     "ratio": 3.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 3.0,
+     "output_ratio": 3.0,
+     "ratio": 3.0
+    }
+   }
   },
   {
    "id": "api-apiyi-com",
@@ -2533,9 +2627,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "MiniMax",
@@ -2597,8 +2689,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 15 个零价/免费模型（如 MAI-Image-2.6），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2648,10 +2740,23 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "api-nekoapi-com",
+   "pricing_basis": "anchor",
    "name": "api.nekoapi.com",
    "website": "https://api.nekoapi.com",
    "tagline": "公开定价接口可核，在列 158 个模型",
@@ -2663,7 +2768,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -2713,8 +2817,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 33 个零价/免费模型（如 swap_face），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2764,7 +2868,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.6,
+     "output_ratio": 0.6,
+     "ratio": 0.6
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "id": "tiantianai-pro",
@@ -2778,9 +2890,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "DeepSeek",
@@ -2818,8 +2928,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 6 个零价/免费模型（如 jimeng[sd-2.0]），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2873,6 +2983,7 @@
   },
   {
    "id": "aifast-site",
+   "pricing_basis": "anchor",
    "name": "速擎智能API",
    "website": "https://aifast.site",
    "tagline": "公开定价接口可核，在列 229 个模型",
@@ -2884,7 +2995,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -2937,8 +3047,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 50 个零价/免费模型（如 hunyuan-1.5-720p），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -2988,10 +3098,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.15,
+     "output_ratio": 0.15,
+     "ratio": 0.15
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "sucloud-vip",
+   "pricing_basis": "anchor",
    "name": "Sucloud API",
    "website": "https://sucloud.vip",
    "tagline": "公开定价接口可核，在列 341 个模型",
@@ -3003,7 +3122,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -3067,8 +3185,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 108 个零价/免费模型（如 gpt-image-2-c），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": [
     "支付宝",
@@ -3134,7 +3252,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.1147,
+     "output_ratio": 0.1147,
+     "ratio": 0.1147
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1147,
+     "output_ratio": 0.1147,
+     "ratio": 0.1147
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "deeprouter-top",
@@ -3148,9 +3279,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Anthropic",
@@ -3190,8 +3319,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 24 个零价/免费模型（如 cs-claude-fable-5），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": [
     "支付宝",
@@ -3244,10 +3373,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "api-ikuncode-cc",
+   "pricing_basis": "anchor",
    "name": "IKunCode",
    "website": "https://api.ikuncode.cc",
    "tagline": "公开定价接口可核，在列 38 个模型",
@@ -3259,7 +3396,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -3319,8 +3455,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gemini-3.1-flash-image-preview），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -3370,10 +3506,24 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.7,
+     "output_ratio": 0.7,
+     "ratio": 0.7
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.7,
+     "output_ratio": 0.7,
+     "ratio": 0.7
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "id": "modelsell-com",
+   "pricing_basis": "anchor",
    "name": "Modelsell",
    "website": "https://modelsell.com",
    "tagline": "公开定价接口可核，在列 243 个模型",
@@ -3385,7 +3535,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -3448,8 +3597,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 45 个零价/免费模型（如 gpt-image-2.5-sunburst-count），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -3499,7 +3648,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.1,
+     "output_ratio": 0.1,
+     "ratio": 0.1
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1,
+     "output_ratio": 0.1,
+     "ratio": 0.1
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "crazyrouter-com",
@@ -3513,9 +3675,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "豆包",
@@ -3566,8 +3726,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 56 个零价/免费模型（如 nano-banana-pro），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -3617,10 +3777,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "makerend-com",
+   "pricing_basis": "anchor",
    "name": "创界 API",
    "website": "https://makerend.com",
    "tagline": "公开定价接口可核，在列 341 个模型",
@@ -3632,7 +3800,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -3696,8 +3863,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 108 个零价/免费模型（如 gpt-image-2-c），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -3747,10 +3914,24 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.1103,
+     "output_ratio": 0.1103,
+     "ratio": 0.1103
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1103,
+     "output_ratio": 0.1103,
+     "ratio": 0.1103
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "oai2api-com",
+   "pricing_basis": "anchor",
    "name": "Oai2api",
    "website": "https://oai2api.com",
    "tagline": "公开定价接口可核，在列 30 个模型",
@@ -3862,7 +4043,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.2,
+     "output_ratio": 0.2,
+     "ratio": 0.2
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "clauddy-com",
@@ -3876,8 +4065,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free"
+    "gemini"
    ],
    "vendors": [
     "Anthropic",
@@ -3898,8 +4086,8 @@
    "prices": [],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 6 个零价/免费模型（如 gpt-image-2.5-flare），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -3963,9 +4151,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "MiniMax",
@@ -4030,8 +4216,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 56 个零价/免费模型（如 nano-banana-pro），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -4092,10 +4278,23 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "relaybases-com",
+   "pricing_basis": "anchor",
    "name": "RelayBases",
    "website": "https://relaybases.com",
    "tagline": "公开定价接口可核，在列 78 个模型",
@@ -4107,7 +4306,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -4157,8 +4355,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 7 个零价/免费模型（如 grok-imagine-edit），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -4208,7 +4406,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.8,
+     "output_ratio": 0.8,
+     "ratio": 0.8
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "id": "novaapi-ai",
@@ -4222,9 +4428,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "OpenAI",
@@ -4260,8 +4464,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gpt-4o-mini-tts），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -4311,7 +4515,14 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "code0-ai",
@@ -4325,9 +4536,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Anthropic",
@@ -4389,8 +4598,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 8 个零价/免费模型（如 gemini-3-pro-image-c），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": [
     "支付宝",
@@ -4455,10 +4664,23 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.5,
+     "output_ratio": 1.5,
+     "ratio": 1.5
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.5,
+     "output_ratio": 1.5,
+     "ratio": 1.5
+    }
+   }
   },
   {
    "id": "anyaigc-ai",
+   "pricing_basis": "anchor",
    "name": "AnyAIGC聚合站",
    "website": "https://anyaigc.ai",
    "tagline": "公开定价接口可核，在列 341 个模型",
@@ -4470,7 +4692,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -4534,8 +4755,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 108 个零价/免费模型（如 gpt-image-2-c），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -4585,7 +4806,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.1191,
+     "output_ratio": 0.1191,
+     "ratio": 0.1191
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1191,
+     "output_ratio": 0.1191,
+     "ratio": 0.1191
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "tokenage-ai",
@@ -4599,9 +4833,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Qwen",
@@ -4652,8 +4884,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 15 个零价/免费模型（如 happyhorse-1.0-r2v），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -4703,10 +4935,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "tokenbox-cloud",
+   "pricing_basis": "anchor",
    "name": "TokenBOX",
    "website": "https://tokenbox.cloud",
    "tagline": "公开定价接口可核，在列 23 个模型",
@@ -4812,10 +5052,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.0375,
+     "output_ratio": 0.0375,
+     "ratio": 0.0375
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "dapicloud-com",
+   "pricing_basis": "anchor",
    "name": "DAPI",
    "website": "https://dapicloud.com",
    "tagline": "公开定价接口可核，在列 115 个模型",
@@ -4827,7 +5076,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -4878,8 +5126,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gpt-image-2-count），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -4929,7 +5177,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.875,
+     "output_ratio": 0.875,
+     "ratio": 0.875
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.875,
+     "output_ratio": 0.875,
+     "ratio": 0.875
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "id": "api-getezclaw-com",
@@ -4942,9 +5203,7 @@
    "categories": [
     "aggregator",
     "claude",
-    "openai",
-    "free",
-    "lowcost"
+    "openai"
    ],
    "vendors": [
     "OpenAI",
@@ -4975,8 +5234,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gpt-image-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -5030,6 +5289,7 @@
   },
   {
    "id": "api-antmoo-com",
+   "pricing_basis": "anchor",
    "name": "AntMoo API",
    "website": "https://api.antmoo.com",
    "tagline": "公开定价接口可核，在列 341 个模型",
@@ -5041,7 +5301,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -5105,8 +5364,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 108 个零价/免费模型（如 gpt-image-2-c），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": "无起充门槛（官网首页明示 No minimum top-up，按量计费、余额不过期）",
@@ -5168,10 +5427,24 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.1015,
+     "output_ratio": 0.1015,
+     "ratio": 0.1015
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1015,
+     "output_ratio": 0.1015,
+     "ratio": 0.1015
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "tokensmind-ai",
+   "pricing_basis": "anchor",
    "name": "TokensMind",
    "website": "https://tokensmind.ai",
    "tagline": "公开定价接口可核，在列 82 个模型",
@@ -5182,9 +5455,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Google",
@@ -5244,8 +5515,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 qwen-image-edit-plus），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -5302,10 +5573,25 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.35,
+     "output_ratio": 0.35,
+     "ratio": 0.35
+    }
+   },
+   "price_tier": "明显低",
+   "price_consistency": "inconsistent"
   },
   {
    "id": "thinkai-tv",
+   "pricing_basis": "anchor",
    "name": "ThinkAI",
    "website": "https://thinkai.tv",
    "tagline": "公开定价接口可核，在列 38 个模型",
@@ -5316,7 +5602,6 @@
     "aggregator",
     "claude",
     "openai",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -5353,8 +5638,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 8 个零价/免费模型（如 nemotron-3.5-content-safety），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -5404,7 +5689,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.6,
+     "output_ratio": 0.6,
+     "ratio": 0.6
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "id": "api-coreapi-com-cn",
@@ -5497,9 +5790,7 @@
    "op_type": "聚合",
    "categories": [
     "aggregator",
-    "openai",
-    "free",
-    "lowcost"
+    "openai"
    ],
    "vendors": [
     "DeepSeek",
@@ -5534,8 +5825,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 4 个零价/免费模型（如 gpt-image-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -5599,8 +5890,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free"
+    "gemini"
    ],
    "vendors": [
     "OpenAI",
@@ -5624,8 +5914,8 @@
    "prices": [],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gpt-image-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -5689,9 +5979,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Google",
@@ -5741,8 +6029,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 8 个零价/免费模型（如 nano-banana-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -5792,10 +6080,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "console-claudeapi-com",
+   "pricing_basis": "anchor",
    "name": "ClaudeApi",
    "website": "https://console.claudeapi.com",
    "tagline": "公开定价接口可核，在列 38 个模型",
@@ -5900,7 +6196,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.8,
+     "output_ratio": 0.8,
+     "ratio": 0.8
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.8,
+     "output_ratio": 0.8,
+     "ratio": 0.8
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "id": "console-lqapi-xyz",
@@ -5914,8 +6223,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "OpenAI",
@@ -5999,10 +6307,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "api-jui87-com",
+   "pricing_basis": "anchor",
    "name": "社会牛码",
    "website": "https://api.jui87.com",
    "tagline": "公开定价接口可核，在列 68 个模型",
@@ -6013,9 +6329,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "OpenAI",
@@ -6059,8 +6373,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 18 个零价/免费模型（如 wan-3.0），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -6110,10 +6424,25 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.26,
+     "output_ratio": 0.26,
+     "ratio": 0.26
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.13,
+     "output_ratio": 0.13,
+     "ratio": 0.13
+    }
+   },
+   "price_tier": "异常低价",
+   "price_consistency": "inconsistent"
   },
   {
    "id": "api-models-com",
+   "pricing_basis": "anchor",
    "name": "API Models",
    "website": "https://api-models.com",
    "tagline": "公开定价接口可核，在列 62 个模型",
@@ -6125,7 +6454,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -6186,8 +6514,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 12 个零价/免费模型（如 gemini-3.1-flash-image-preview），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -6237,10 +6565,24 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.1,
+     "output_ratio": 0.1,
+     "ratio": 0.1
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1,
+     "output_ratio": 0.1,
+     "ratio": 0.1
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "liangxinapi-top",
+   "pricing_basis": "anchor",
    "name": "良心api",
    "website": "https://liangxinapi.top",
    "tagline": "公开定价接口可核，在列 188 个模型",
@@ -6252,7 +6594,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -6304,8 +6645,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 24 个零价/免费模型（如 MiniMax-M2.5:free），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -6355,10 +6696,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.25,
+     "output_ratio": 0.25,
+     "ratio": 0.25
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "coderplan-ai",
+   "pricing_basis": "anchor",
    "name": "CoderPlan",
    "website": "https://coderplan.ai",
    "tagline": "公开定价接口可核，在列 60 个模型",
@@ -6370,7 +6720,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -6405,8 +6754,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 4 个零价/免费模型（如 grok-imagine-image-edit），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": [
     "Stripe"
@@ -6458,7 +6807,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.5,
+     "output_ratio": 0.5,
+     "ratio": 0.5
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "id": "havai-im",
@@ -6553,9 +6910,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Google",
@@ -6605,8 +6960,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 3 个零价/免费模型（如 gpt-image-1），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -6656,7 +7011,14 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "router-aionclaw-ai",
@@ -6670,9 +7032,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "xAI",
@@ -6711,8 +7071,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 32 个零价/免费模型（如 wan3.0-video-prime），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -6762,10 +7122,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "aitokensflux-com",
+   "pricing_basis": "anchor",
    "name": "AI Tokens Flux",
    "website": "https://aitokensflux.com",
    "tagline": "公开定价接口可核，在列 46 个模型",
@@ -6775,8 +7143,7 @@
    "categories": [
     "aggregator",
     "claude",
-    "openai",
-    "lowcost"
+    "openai"
    ],
    "vendors": [
     "OpenAI",
@@ -6874,7 +7241,21 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.5,
+     "output_ratio": 1.5,
+     "ratio": 1.5
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.45,
+     "output_ratio": 0.45,
+     "ratio": 0.45
+    }
+   },
+   "price_tier": "明显低",
+   "price_consistency": "inconsistent"
   },
   {
    "id": "api-uiuihao-com",
@@ -6888,9 +7269,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Anthropic",
@@ -6927,8 +7306,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 46 个零价/免费模型（如 doubao-seedance-1-5-pro-251215），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -6978,10 +7357,18 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "tian-shu-org",
+   "pricing_basis": "anchor",
    "name": "天枢 (tian-shu.org)",
    "website": "https://tian-shu.org",
    "tagline": "公开定价接口可核，在列 101 个模型",
@@ -6993,7 +7380,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -7054,8 +7440,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 58 个零价/免费模型（如 omni-fast），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7105,10 +7491,24 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.25,
+     "output_ratio": 0.25,
+     "ratio": 0.25
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.25,
+     "output_ratio": 0.25,
+     "ratio": 0.25
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "aiberm-com",
+   "pricing_basis": "anchor",
    "name": "AIBerm",
    "website": "https://aiberm.com",
    "tagline": "公开定价接口可核，在列 155 个模型",
@@ -7120,7 +7520,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -7182,8 +7581,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 8 个零价/免费模型（如 gemini-3.1-flash-image-preview），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7233,7 +7632,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.15,
+     "output_ratio": 0.15,
+     "ratio": 0.15
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.1499,
+     "output_ratio": 0.1499,
+     "ratio": 0.1499
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "4sapi-com",
@@ -7247,9 +7659,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Google",
@@ -7299,8 +7709,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 16 个零价/免费模型（如 omni-fast-v2v），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7350,7 +7760,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 2.0,
+     "output_ratio": 2.0,
+     "ratio": 2.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 2.0,
+     "output_ratio": 2.0,
+     "ratio": 2.0
+    }
+   }
   },
   {
    "id": "jiugx-com",
@@ -7363,8 +7785,7 @@
    "categories": [
     "aggregator",
     "openai",
-    "gemini",
-    "free"
+    "gemini"
    ],
    "vendors": [
     "豆包",
@@ -7394,8 +7815,8 @@
    "prices": [],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 37 个零价/免费模型（如 nvidia/nemotron-3-ultra-550b-a55b），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7449,6 +7870,7 @@
   },
   {
    "id": "last-api-ai",
+   "pricing_basis": "anchor",
    "name": "Last API",
    "website": "https://last-api.ai",
    "tagline": "公开定价接口可核，在列 77 个模型",
@@ -7459,9 +7881,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Anthropic",
@@ -7510,8 +7930,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gemini-3-pro-image-preview），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7561,7 +7981,21 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 2.5,
+     "output_ratio": 2.5,
+     "ratio": 2.5
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.9,
+     "output_ratio": 0.9,
+     "ratio": 0.9
+    }
+   },
+   "price_tier": "略低",
+   "price_consistency": "inconsistent"
   },
   {
    "id": "cn-chrouter-com",
@@ -7575,9 +8009,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Google",
@@ -7639,8 +8071,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 11 个零价/免费模型（如 gpt-image-2.5），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7690,10 +8122,23 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "clawrouter-com",
+   "pricing_basis": "anchor",
    "name": "clawrouter",
    "website": "https://clawrouter.com",
    "tagline": "公开定价接口可核，在列 76 个模型",
@@ -7705,7 +8150,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -7768,8 +8212,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 16 个零价/免费模型（如 viduq2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": [
     "Stripe"
@@ -7821,7 +8265,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.7,
+     "output_ratio": 0.7,
+     "ratio": 0.7
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.7,
+     "output_ratio": 0.7,
+     "ratio": 0.7
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "id": "aizhongzhuan-com",
@@ -7835,9 +8292,7 @@
     "aggregator",
     "claude",
     "openai",
-    "gemini",
-    "free",
-    "lowcost"
+    "gemini"
    ],
    "vendors": [
     "Anthropic",
@@ -7879,8 +8334,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 2 个零价/免费模型（如 gpt-image-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -7930,10 +8385,23 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 1.0,
+     "output_ratio": 1.0,
+     "ratio": 1.0
+    }
+   }
   },
   {
    "id": "kivocat-com",
+   "pricing_basis": "anchor",
    "name": "kivocat API",
    "website": "https://kivocat.com",
    "tagline": "公开定价接口可核，在列 8 个模型",
@@ -8024,7 +8492,15 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.6667,
+     "output_ratio": 0.6667,
+     "ratio": 0.6667
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "id": "dmc-cc",
@@ -8035,8 +8511,7 @@
    "type": "中转/聚合",
    "op_type": "聚合",
    "categories": [
-    "aggregator",
-    "free"
+    "aggregator"
    ],
    "vendors": [
     "MiniMax"
@@ -8049,8 +8524,8 @@
    "prices": [],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 MiniMax-H3），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -8190,6 +8665,7 @@
   },
   {
    "id": "apirouter-chat",
+   "pricing_basis": "anchor",
    "name": "apirouter",
    "website": "https://apirouter.chat",
    "tagline": "公开定价接口可核，在列 30 个模型",
@@ -8201,7 +8677,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -8233,8 +8708,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gpt-image-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -8295,10 +8770,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.5714,
+     "output_ratio": 0.5714,
+     "ratio": 0.5714
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "id": "aitoke-top",
+   "pricing_basis": "anchor",
    "name": "Uo Code",
    "website": "https://aitoke.top",
    "tagline": "公开定价接口可核，在列 56 个模型",
@@ -8310,7 +8794,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -8368,8 +8851,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 5 个零价/免费模型（如 gpt-image-2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -8419,10 +8902,24 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 0.14,
+     "output_ratio": 0.14,
+     "ratio": 0.14
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.14,
+     "output_ratio": 0.14,
+     "ratio": 0.14
+    }
+   },
+   "price_tier": "异常低价"
   },
   {
    "id": "api000-com",
+   "pricing_basis": "anchor",
    "name": "零度AI",
    "website": "https://api000.com",
    "tagline": "公开定价接口可核，在列 40 个模型",
@@ -8434,7 +8931,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -8467,8 +8963,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 6 个零价/免费模型（如 gpt-image-2.5-sunburst），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -8518,10 +9014,19 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.5,
+     "output_ratio": 0.5,
+     "ratio": 0.5
+    }
+   },
+   "price_tier": "明显低"
   },
   {
    "id": "beefapi-com",
+   "pricing_basis": "anchor",
    "name": "BeefAPI",
    "website": "https://beefapi.com",
    "tagline": "公开定价接口可核，在列 40 个模型",
@@ -8533,7 +9038,6 @@
     "claude",
     "openai",
     "gemini",
-    "free",
     "lowcost"
    ],
    "vendors": [
@@ -8594,8 +9098,8 @@
    ],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 6 个零价/免费模型（如 midjourney-v8.2），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,
@@ -8645,7 +9149,20 @@
    "ad_start": null,
    "ad_end": null,
    "claimed": false,
-   "verification_status": "verified"
+   "verification_status": "verified",
+   "price_ratio": {
+    "claude-sonnet-5-5": {
+     "input_ratio": 1.225,
+     "output_ratio": 1.225,
+     "ratio": 1.225
+    },
+    "claude-sonnet-4-6": {
+     "input_ratio": 0.8167,
+     "output_ratio": 0.8167,
+     "ratio": 0.8167
+    }
+   },
+   "price_tier": "略低"
   },
   {
    "id": "lztoken-top",
@@ -8658,8 +9175,7 @@
    "categories": [
     "aggregator",
     "claude",
-    "openai",
-    "free"
+    "openai"
    ],
    "vendors": [
     "Anthropic",
@@ -8678,8 +9194,8 @@
    "prices": [],
    "pricing_model": "按量付费（倍率计价，官网公开定价接口公示）",
    "free_quota": {
-    "has": true,
-    "text": "其公开定价接口中列有 1 个零价/免费模型（如 gpt-image-2.5），以官网定价接口现行数据为准"
+    "has": null,
+    "text": null
    },
    "payments": null,
    "min_topup": null,

@@ -80,7 +80,7 @@
         <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
       </form>
     </div>
-    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，仅提供服务发现、比较与官网导航，<strong>不提供任何中转服务，不发售 API Key，不经手你的资金</strong>。本站与本页介绍的第三方服务<strong>没有运营、代理或隶属关系</strong>；点「访问官网」将离开本站，注册、充值与使用均发生在第三方站点，请自行核对条款。</p>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与本页介绍的第三方服务<strong>没有运营、代理或隶属关系</strong>；点「访问官网」将离开本站，注册、充值与使用均发生在第三方站点，请自行核对条款。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -102,14 +102,31 @@
   const kvCell = (title, inner) =>
     '<div class="cell"><h4>' + esc(title) + '</h4><div>' + inner + '</div></div>';
 
+  /* 价格分层行（第十九轮）：锚点模型（Sonnet 5.5/4.6）价格行下注明相对官方价比例与分层；
+     异常低价（<30%）附风险提示。比例与分层由数据层 price_ratio 给出，页面只呈现 */
+  const tierLine = p => {
+    const pr = (svc.price_ratio || {})[p.model_id];
+    if (!pr) return '';
+    const pct = Math.round(pr.ratio * 100);
+    if (pr.ratio >= 1) return '<div class="tier-line">相对官方价约 ' + pct + '%</div>';
+    const tier = pr.ratio >= 0.7 ? '略低' : (pr.ratio >= 0.3 ? '明显低' : '异常低价');
+    if (tier === '异常低价')
+      return '<div class="tier-line abn">价格分层：异常低价（约官方价 ' + pct + '%）——明显低于官方价，请注意甄别来源与稳定性风险</div>';
+    return '<div class="tier-line">价格分层：' + tier + '（约官方价 ' + pct + '%）</div>';
+  };
   const priceRows = (svc.prices || []).map(p =>
     '<tr><td><strong>' + esc(p.model_label) + '</strong>' +
-    (p.note ? '<div style="color:var(--ink-3);font-size:12px">' + esc(p.note) + '</div>' : '') + '</td>' +
+    (p.note ? '<div style="color:var(--ink-3);font-size:12px">' + esc(p.note) + '</div>' : '') + tierLine(p) + '</td>' +
     '<td class="price">' + fmtUsd(p.input) + '</td><td class="price">' + fmtUsd(p.output) + '</td>' +
     '<td class="price">' + (p.cache_read != null ? fmtUsd(p.cache_read) : '—') + '</td>' +
     '<td>' + esc(p.currency) + ' · ' + esc(p.unit) + '</td>' +
     '<td><a href="' + esc(p.price_source_url) + '" target="_blank" rel="noopener noreferrer">数据来源</a></td></tr>'
   ).join('');
+  const priceNotes =
+    (svc.price_consistency === 'inconsistent'
+      ? '<p class="note">价格一致性提示：其 Claude Sonnet 5.5 与 4.6 相对官方价的比例差异异常，本站已暂停其「低价」归类，待人工复核。</p>' : '') +
+    (hasAbnormalPrice(svc)
+      ? '<p class="note">异常低价提示：其 Sonnet 价格低于官方价的三成，低得异常；价格低不代表来源合规或服务稳定，请自行评估，本站不作推荐。</p>' : '');
 
   const priceBlock = priceRows
     ? '<div class="tablewrap"><table class="cmp"><thead><tr><th>模型</th><th>输入价</th><th>输出价</th><th>缓存读价</th><th>计费单位</th><th>数据来源</th></tr></thead><tbody>' + priceRows + '</tbody></table></div>'
@@ -178,10 +195,11 @@
      四格均为本站真实字段——起充、已核实最低单价、服务状态、最近核实；
      不展示运营时长与可用性百分比（无可靠来源，见「状态口径说明」）。 */
   const minIn = minUsdInput(svc);
+  const minRec = minUsdPriceRec(svc);
   const metrics =
     '<div class="metrics">' +
     '<div class="m"><h4>起充金额</h4><div>' + (svc.min_topup ? esc(svc.min_topup) : '待核实') + '</div></div>' +
-    '<div class="m"><h4>已核实最低输入价</h4><div>' + (minIn != null ? fmtUsd(minIn) + ' / 1M' : '待核实') + '</div></div>' +
+    '<div class="m"><h4>已核实最低输入价</h4><div>' + (minIn != null ? fmtUsd(minIn) + ' / 1M' + (minRec ? '（' + esc(priceModelName(minRec)) + '）' : '') : '待核实') + '</div></div>' +
     '<div class="m"><h4>服务状态</h4><div>' + esc(svc.status) + '</div></div>' +
     '<div class="m"><h4>最近核实</h4><div>' + esc(svc.verified_at) + '</div></div>' +
     '</div>';
@@ -205,13 +223,13 @@
 
     '<section class="blk"><div class="blk-h"><h2>介绍</h2></div><p style="max-width:760px">' + esc(svc.intro) + '</p></section>' +
 
-    '<section class="blk"><div class="blk-h"><h2>价格（已核实部分）</h2><span>逐条可回官方页面复核</span></div>' + priceBlock + '</section>' +
+    '<section class="blk"><div class="blk-h"><h2>价格（已核实部分）</h2><span>逐条可回官方页面复核</span></div>' + priceBlock + priceNotes + '</section>' +
 
     '<section class="blk"><div class="blk-h"><h2>支持模型（已核实范围）</h2></div>' + modelBlock + '</section>' +
 
     '<section class="blk"><div class="blk-h"><h2>支付、额度与接入</h2></div><div class="kv">' +
       kvCell('支付方式', listOrUnknown(svc.payments)) +
-      kvCell('免费额度', freeLabel(svc) + freeStaleTagHTML(svc)) +
+      kvCell('免费额度', freeLabel(svc) + freeKindBadgesHTML(svc) + freeStaleTagHTML(svc)) +
       kvCell('注册要求', svc.registration ? esc(svc.registration) : UNKNOWN) +
       kvCell('计费模式', svc.pricing_model ? esc(svc.pricing_model) : UNKNOWN) +
       kvCell('API 兼容格式', listOrUnknown(svc.api_formats)) +

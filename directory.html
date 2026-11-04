@@ -105,7 +105,7 @@
         <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
       </form>
     </div>
-    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，仅提供服务发现、比较与官网导航，<strong>不提供任何中转服务，不发售 API Key，不经手你的资金</strong>。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>。所有价格与额度以服务商官网为准，本站数据注明核实日期。</p>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>。所有价格与额度以服务商官网为准，本站数据注明核实日期。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -126,6 +126,9 @@
   if (catDef) {
     document.getElementById('pageTitle').textContent = catDef.name;
     document.getElementById('pageDesc').textContent = catDef.desc + '——以下为该分类下的收录服务，仍可叠加其它筛选条件。';
+    if (cat === 'lowcost') {
+      document.getElementById('pageDesc').textContent += '价格低于官方不代表来源合规或服务稳定，请自行评估；本站低价锚点仅限 Claude Sonnet 官方价，无该模型的服务不在低价口径内。低价内再按相对官方价比例分层呈现：七至十成为「略低」、三至七成为「明显低」、低于三成为「异常低价」；异常低价带风险提示、不作推荐。';
+    }
     document.title = catDef.name + ' · Aivaro 导航';
     document.getElementById('presetNote').hidden = false;
     document.getElementById('presetChip').textContent = catDef.name;
@@ -134,7 +137,7 @@
   const $ = id => document.getElementById(id);
   const state = {
     q: params.get('q') || '',
-    families: new Set(), bands: new Set(), free: new Set(),
+    families: new Set(), bands: new Set(), free: new Set(), fkinds: new Set(),
     pays: new Set(), formats: new Set(), statuses: new Set(), ops: new Set(),
     sort: 'reco', view: 'grid',
   };
@@ -166,6 +169,9 @@
         const has = s.free_quota ? s.free_quota.has : null;
         return (set.has('yes') && has === true) || (set.has('unknown') && has === null);
       } },
+    { key: 'fkinds', title: '免费类型', values: () =>
+        FREE_KIND_LABELS.map(([k, label]) => ({ v: k, label })),
+      match: (s, set) => (s.free_kinds || []).some(k => set.has(k)) },
     { key: 'pays', title: '支付方式', values: () =>
         Array.from(new Set(services.flatMap(s => s.payments || []))).sort()
           .map(v => ({ v, label: v })),
@@ -263,6 +269,9 @@
     if (state.sort === 'reco') arr.sort(compositeCompare);
     else if (state.sort === 'price') arr.sort((a, b) => {
       const x = minUsdInput(a), y = minUsdInput(b);
+      /* 异常低价警示条目沉后（第二十轮裁决 2）：任一锚点模型比例 <30% 者排在无警示条目之后，再按状态与价格排 */
+      const ap = hasAbnormalPrice(a) ? 1 : 0, bp = hasAbnormalPrice(b) ? 1 : 0;
+      if (ap !== bp) return ap - bp;
       const ab = isAbnormal(a) ? 1 : 0, bb = isAbnormal(b) ? 1 : 0;
       if (ab !== bb) return ab - bb;
       if (x === null && y === null) return a.name.localeCompare(b.name, 'zh');

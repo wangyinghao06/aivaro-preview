@@ -62,14 +62,13 @@
 <main class="wrap">
   <div class="hero">
     <h1>找到适合你的 AI API 中转服务</h1>
-    <p class="lede">Aivaro 只做一件事：把中转与聚合服务的<strong>价格、免费额度、状态和官网入口</strong>整理清楚，每条信息标注来源与核实时间，查不到的明确标「待核实」，不编造。</p>
+    <p class="lede">Aivaro 把中转与聚合服务的<strong>价格、免费额度、状态和官网入口</strong>整理清楚，每条信息标注来源与核实时间，查不到的明确标「待核实」，不编造。</p>
     <p class="trust-bar" id="trustBar" hidden><span>已核实 <b id="trustCount">–</b> 家</span><span aria-hidden="true">·</span><span>数据更新于 <span id="trustDate">–</span></span><span aria-hidden="true">·</span><a href="about.html#verify-method">核实方法 →</a></p>
-    <p class="submit-cta"><a class="btn outline block" href="submit.html">＋ 投稿收录</a></p>
     <form class="bigsearch" id="homeSearch" action="directory.html" method="get" role="search">
-      <input type="search" name="q" id="homeSearchInput" placeholder="搜服务名、厂商或模型，如 Claude、DeepSeek…" aria-label="搜索服务">
+      <input type="search" name="q" id="homeSearchInput" placeholder="搜服务名、厂商或模型，如 DeepSeek…" aria-label="搜索服务">
       <button class="btn" type="submit">搜索</button>
     </form>
-    <p class="note" style="position:relative">任意页面按 <strong>⌘K / Ctrl+K</strong> 可呼出全站搜索面板，回车直达服务详情。</p>
+    <p class="note" style="position:relative">任意页面按 <strong>⌘K / Ctrl+K</strong> 可呼出全站搜索面板，回车直达服务详情。运营着中转或聚合服务，可<a href="submit.html">投稿收录</a>。</p>
   </div>
 
   <section class="blk" aria-labelledby="h-cat">
@@ -115,7 +114,7 @@
         <p class="sub-note">退订方式：回复任意一封订阅邮件注明「退订」，或经<a href="about.html#contact">关于页邮箱</a>联系我们删除你的邮箱。</p>
       </form>
     </div>
-    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，仅提供服务发现、比较与官网导航，<strong>不提供任何中转服务，不发售 API Key，不经手你的资金</strong>。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>；如出现「商业合作」标记的条目，会在该条目处单独注明。所有价格与额度以服务商官网为准，本站数据注明核实日期，过期信息请以官网实时页面为准。</p>
+    <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>；如出现「商业合作」标记的条目，会在该条目处单独注明。所有价格与额度以服务商官网为准，本站数据注明核实日期，过期信息请以官网实时页面为准。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -133,7 +132,12 @@
 
   document.getElementById('catGrid').innerHTML = CATEGORIES.map(c => {
     const n = services.filter(s => (s.categories || []).includes(c.id)).length;
-    return '<a class="cat" href="directory.html?cat=' + c.id + '"><b>' + esc(c.name) + '</b><span>' + esc(c.desc) + '</span><em>' + n + ' 家 →</em></a>';
+    /* 免费分类按三型分别计数（同一家多型可重复计入小类，大类为去重家数） */
+    const sub = c.id === 'free'
+      ? '<span class="cat-sub">' + FREE_KIND_LABELS.map(([k, label]) =>
+          label + ' ' + services.filter(s => (s.free_kinds || []).includes(k)).length).join(' · ') + '</span>'
+      : '';
+    return '<a class="cat" href="directory.html?cat=' + c.id + '"><b>' + esc(c.name) + '</b><span>' + esc(c.desc) + '</span>' + sub + '<em>' + n + ' 家 →</em></a>';
   }).join('');
 
   const newIds = newIdSet(services, data.meta.verified_at);

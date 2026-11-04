@@ -2,8 +2,9 @@
 'use strict';
 
 const CATEGORIES = [
-  { id: 'free',       name: '免费 AI API',    desc: '有免费额度或免费模型' },
-  { id: 'lowcost',    name: '低价 AI API',    desc: '折扣或低价口径明确' },
+  { id: 'free',       name: '免费 AI API',    desc: '有免费额度（以官网为准）' },
+  { id: 'lowcost',    name: '低价 AI API',    desc: '已核实单价低于官方价' },
+  { id: 'discount_labeled', name: '标注折扣', desc: '服务商自标原价与折扣价，未经官方价锚点核实' },
   { id: 'claude',     name: 'Claude 中转',    desc: '主打 Anthropic 模型' },
   { id: 'openai',     name: 'OpenAI 中转',    desc: '主打 GPT 系列模型' },
   { id: 'gemini',     name: 'Gemini 中转',    desc: '主打 Google 模型' },
@@ -78,11 +79,21 @@ function hostOf(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return url; }
 }
 
+/* 该服务已核实的最低美元输入价对应的价格记录（含模型名）；无则 null */
+function minUsdPriceRec(svc) {
+  const usd = (svc.prices || []).filter(p => p.currency === 'USD' && p.input != null);
+  if (!usd.length) return null;
+  return usd.reduce((a, b) => (b.input < a.input ? b : a));
+}
 /* 该服务已核实的最低美元输入价（每 1M tokens）；无则 null */
 function minUsdInput(svc) {
-  const usd = (svc.prices || []).filter(p => p.currency === 'USD');
-  if (!usd.length) return null;
-  return Math.min.apply(null, usd.map(p => p.input));
+  const rec = minUsdPriceRec(svc);
+  return rec ? rec.input : null;
+}
+/* 价格记录的模型名（label 优先；两者皆缺按缺失处理，不编造） */
+function priceModelName(rec) {
+  if (!rec) return '';
+  return rec.model_label || rec.model_id || '对应模型名待核实';
 }
 
 function freeLabel(svc) {
@@ -90,6 +101,38 @@ function freeLabel(svc) {
   if (svc.free_quota.has === true) return esc(svc.free_quota.text);
   if (svc.free_quota.has === false) return '无（官网未提供免费层）';
   return UNKNOWN;
+}
+
+/* 免费类型细分（2026-11-04 第十四轮定版定义）：依已核实的 free_quota 原文逐家归类，一家可多型；
+   长期免费＝以量/价计量且持续有效（零价模型可持续调用、长期免费套餐/额度）；
+   注册赠送＝与注册绑定的一次性赠额；限次＝以次数计量（每日/每月/总计 N 次，含每日刷新型，如 OpenRouter 每日 50 次）；
+   free_kinds 缺失即不渲染，不臆测补标 */
+const FREE_KIND_LABELS = [
+  ['long_term', '长期免费'],
+  ['signup_credit', '注册赠送'],
+  ['limited', '限次'],
+];
+function freeKindBadgesHTML(svc) {
+  const kinds = (svc && svc.free_kinds) || [];
+  if (!kinds.length) return '';
+  return FREE_KIND_LABELS.filter(([k]) => kinds.includes(k))
+    .map(([, label]) => '<span class="badge fkind">' + label + '</span>').join('');
+}
+
+/* 价格分层（2026-11-04 第十九轮）：price_tier = 该站 Sonnet 价格相对官方价比例的分层
+   （略低 70%–100% / 明显低 30%–70% / 异常低价 <30%），口径见关于页。
+   第二十轮口径修正：异常低价警示与分层/入选脱钩——任一锚点模型比例 <30% 即显示警示，
+   与「价格不一致」无关（不一致仅决定是否入低价列表）；分层角标（略低/明显低）仍不在
+   不一致条目上展示，避免被读作低价背书 */
+function hasAbnormalPrice(svc) {
+  const pr = (svc && svc.price_ratio) || {};
+  return Object.values(pr).some(v => v && typeof v.ratio === 'number' && v.ratio < 0.3);
+}
+function tierBadgeHTML(svc) {
+  if (!svc) return '';
+  if (hasAbnormalPrice(svc)) return '<span class="badge tier abn">异常低价 · 注意风险</span>';
+  if (!svc.price_tier || svc.price_consistency === 'inconsistent') return '';
+  return '<span class="badge tier">' + esc(svc.price_tier) + '</span>';
 }
 
 function listOrUnknown(arr) {
@@ -137,11 +180,12 @@ function freeStaleTagHTML(svc) {
 
 function cardHTML(svc, opts) {
   opts = opts || {};
-  const min = minUsdInput(svc);
+  const minRec = minUsdPriceRec(svc);
+  const min = minRec ? minRec.input : null;
   const priceLine = svc.type === '导航站'
     ? '<div>导航站本身不售卖 API</div>'
     : (min != null
-        ? '<div>已核实最低输入价 <b>' + fmtUsd(min) + '</b> / 1M tokens 起</div>'
+        ? '<div>已核实最低输入价 <b>' + fmtUsd(min) + '</b> / 1M tokens 起（对应模型：' + esc(priceModelName(minRec)) + '）</div>'
         : '<div>价格待核实</div>');
   /* 起充：短值放卡片右上角（对标行序），长口径留在 meta 行 */
   const topupShort = svc.min_topup && svc.min_topup.length <= 10 ? svc.min_topup : '';
@@ -154,11 +198,15 @@ function cardHTML(svc, opts) {
       '<span class="tip-body">推荐理由：' + esc(svc.recommend_reason || '') + '</span></span>'
     : '';
   const comBadge = svc.is_commercial ? '<span class="badge com">商业合作</span>' : '';
+  /* 标注折扣（第十四轮）：自标折扣证据等级，与「低价」严格分开，不共用文案 */
+  const discBadge = (svc.categories || []).includes('discount_labeled') ? '<span class="badge disc">标注折扣</span>' : '';
   const navBadge = svc.type === '导航站' ? '<span class="badge nav">同类导航站</span>' : '';
   const isNew = opts.newIds && opts.newIds.has(svc.id) ? '<span class="badge new">NEW</span>' : '';
   const freeStale = freeStaleTagHTML(svc);
-  const labelRow = (isNew || rec || comBadge || navBadge || freeBadge || freeStale)
-    ? '<div class="labelrow">' + isNew + rec + comBadge + navBadge + freeBadge + freeStale + '</div>' : '';
+  const kindBadges = freeKindBadgesHTML(svc);
+  const tierBadge = tierBadgeHTML(svc);
+  const labelRow = (isNew || rec || comBadge || discBadge || navBadge || freeBadge || kindBadges || tierBadge || freeStale)
+    ? '<div class="labelrow">' + isNew + rec + comBadge + discBadge + navBadge + freeBadge + kindBadges + tierBadge + freeStale + '</div>' : '';
   const models = svc.models_highlight || [];
   const shown = models.slice(0, 4);
   const more = models.length - shown.length;
