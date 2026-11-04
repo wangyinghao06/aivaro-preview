@@ -108,11 +108,11 @@
     '<td class="price">' + fmtUsd(p.input) + '</td><td class="price">' + fmtUsd(p.output) + '</td>' +
     '<td class="price">' + (p.cache_read != null ? fmtUsd(p.cache_read) : '—') + '</td>' +
     '<td>' + esc(p.currency) + ' · ' + esc(p.unit) + '</td>' +
-    '<td><a href="' + esc(p.price_source_url) + '" target="_blank" rel="noopener noreferrer">官方页</a></td></tr>'
+    '<td><a href="' + esc(p.price_source_url) + '" target="_blank" rel="noopener noreferrer">数据来源</a></td></tr>'
   ).join('');
 
   const priceBlock = priceRows
-    ? '<div class="tablewrap"><table class="cmp"><thead><tr><th>模型</th><th>输入价</th><th>输出价</th><th>缓存读价</th><th>计费单位</th><th>价格来源</th></tr></thead><tbody>' + priceRows + '</tbody></table></div>'
+    ? '<div class="tablewrap"><table class="cmp"><thead><tr><th>模型</th><th>输入价</th><th>输出价</th><th>缓存读价</th><th>计费单位</th><th>数据来源</th></tr></thead><tbody>' + priceRows + '</tbody></table></div>'
     : '<p>逐模型价格：<span class="unknown">待核实</span></p>' + (svc.prices_note ? '<p class="note">' + esc(svc.prices_note) + '</p>' : '');
 
   const pcList = items => items && items.length
@@ -233,7 +233,7 @@
 
     '<section class="blk"><div class="blk-h"><h2>来源与核实</h2></div>' +
       '<div class="src-box">' +
-      '<div>官方来源：<a href="' + esc(svc.source_url) + '" target="_blank" rel="noopener noreferrer">' + esc(svc.source_url) + '</a></div>' +
+      '<div>数据来源：<a href="' + esc(svc.source_url) + '" target="_blank" rel="noopener noreferrer">' + esc(svc.source_url) + '</a></div>' +
       '<div>最近核实时间：' + esc(svc.verified_at) + '（只读访问其官方页面）</div>' +
       '<div>本站收录日期：' + esc(svc.added_at) + '</div>' +
       '<div style="margin-top:6px;color:var(--ink-3)">字段标「待核实」表示本轮未在其官方页面查到，未采用任何第三方数据填充。发现信息有误，可通过官网核对后反馈给我们更正。</div>' +
