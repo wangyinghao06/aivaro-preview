@@ -273,6 +273,11 @@
          不参与已定价段排序，代表价按未定价（null）处理；其余条目仍按有效价格行最低价计 */
       const sortPrice = s => (!s.price_ratio && (s.prices || []).some(p => p.invalid)) ? null : minUsdInput(s);
       const x = sortPrice(a), y = sortPrice(b);
+      /* 条目级沉后（第二十六轮）：price_review_pending=true（价格待核实条目级标记）的条目整体沉到
+         全部非标记条目之后，先于下方异常/分组沉后键判定；非标记条目之间的相对次序不受影响。
+         第二十六轮复核后在架条目中该标记为 0 家，机制保留待后续同类条目使用 */
+      const ar = a.price_review_pending ? 1 : 0, br = b.price_review_pending ? 1 : 0;
+      if (ar !== br) return ar - br;
       /* 沉后组（第二十轮裁决 2＋第二十三轮裁决 2b）：带异常低价警示（任一锚点模型比例 <30%）
          或非 default 分组价条目（price_group_status=non_default）整体排在无警示条目之后，再按状态与价格排 */
       const ap = (hasAbnormalPrice(a) || a.price_group_status === 'non_default') ? 1 : 0,
