@@ -31,7 +31,9 @@ function familiesOf(svc) {
 }
 
 /* 服务商站点图标（本站自托管的 data URI 映射，采集自各站官网自身声明的 icon）：
-   与数据并行取；文件缺失/取不到/条目缺失一律降级为字母块，行为与无图标时一致。 */
+   与数据并行取；文件缺失/取不到/条目缺失一律降级为字母块，行为与无图标时一致。
+   例外（2026-11-04）：freemodel、aitokensflux-com 两家官网仅返回空 SVG、无真实图标，
+   其条目使用本站自绘的统一占位图（灰色地球线条 SVG），非其官方图标，明细见 data-build/icon-log.md。 */
 let ICONS = {};
 const _iconsPromise = fetch('assets/icons.json')
   .then(res => (res.ok ? res.json() : {}))
