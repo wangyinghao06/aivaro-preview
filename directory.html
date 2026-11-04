@@ -106,6 +106,7 @@
       </form>
     </div>
     <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>。所有价格与额度以服务商官网为准，本站数据注明核实日期。</p>
+    <p class="disclaimer">本站仅提供网址信息整理与导航，不提供网络代理、跨境访问或 API 转发服务；站内所列第三方服务均由其运营者负责，本站不对其合规性、可用性与价格作保证；使用任何第三方服务前，请自行核实其资质与条款，并遵守所在地法律法规。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -127,7 +128,7 @@
     document.getElementById('pageTitle').textContent = catDef.name;
     document.getElementById('pageDesc').textContent = catDef.desc + '——以下为该分类下的收录服务，仍可叠加其它筛选条件。';
     if (cat === 'lowcost') {
-      document.getElementById('pageDesc').textContent += '价格低于官方不代表来源合规或服务稳定，请自行评估；本站低价锚点仅限 Claude Sonnet 官方价，无该模型的服务不在低价口径内。低价内再按相对官方价比例分层呈现：七至十成为「略低」、三至七成为「明显低」、低于三成为「异常低价」；异常低价带风险提示、不作推荐。';
+      document.getElementById('pageDesc').textContent += '价格低于官方不代表来源合规或服务稳定，请自行评估；本站低价锚点仅限 Claude Sonnet 官方价，无该模型的服务不在低价口径内。低价内再按相对官方价比例分层呈现：七至十成为「略低」、三至七成为「明显低」、低于三成为「异常低价」；异常低价带风险提示、不作推荐。站内标价，实际成本取决于充值汇率与分组。';
     }
     document.title = catDef.name + ' · Aivaro 导航';
     document.getElementById('presetNote').hidden = false;
@@ -268,9 +269,14 @@
     const arr = list.slice();
     if (state.sort === 'reco') arr.sort(compositeCompare);
     else if (state.sort === 'price') arr.sort((a, b) => {
-      const x = minUsdInput(a), y = minUsdInput(b);
-      /* 异常低价警示条目沉后（第二十轮裁决 2）：任一锚点模型比例 <30% 者排在无警示条目之后，再按状态与价格排 */
-      const ap = hasAbnormalPrice(a) ? 1 : 0, bp = hasAbnormalPrice(b) ? 1 : 0;
+      /* 价格待核实条目（第二十四轮：派生 price_ratio 已撤且存在 invalid 价格行——锚点价格暂停展示者）
+         不参与已定价段排序，代表价按未定价（null）处理；其余条目仍按有效价格行最低价计 */
+      const sortPrice = s => (!s.price_ratio && (s.prices || []).some(p => p.invalid)) ? null : minUsdInput(s);
+      const x = sortPrice(a), y = sortPrice(b);
+      /* 沉后组（第二十轮裁决 2＋第二十三轮裁决 2b）：带异常低价警示（任一锚点模型比例 <30%）
+         或非 default 分组价条目（price_group_status=non_default）整体排在无警示条目之后，再按状态与价格排 */
+      const ap = (hasAbnormalPrice(a) || a.price_group_status === 'non_default') ? 1 : 0,
+            bp = (hasAbnormalPrice(b) || b.price_group_status === 'non_default') ? 1 : 0;
       if (ap !== bp) return ap - bp;
       const ab = isAbnormal(a) ? 1 : 0, bb = isAbnormal(b) ? 1 : 0;
       if (ab !== bb) return ab - bb;

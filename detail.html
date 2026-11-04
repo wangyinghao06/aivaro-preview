@@ -81,6 +81,7 @@
       </form>
     </div>
     <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与本页介绍的第三方服务<strong>没有运营、代理或隶属关系</strong>；点「访问官网」将离开本站，注册、充值与使用均发生在第三方站点，请自行核对条款。</p>
+    <p class="disclaimer">本站仅提供网址信息整理与导航，不提供网络代理、跨境访问或 API 转发服务；站内所列第三方服务均由其运营者负责，本站不对其合规性、可用性与价格作保证；使用任何第三方服务前，请自行核实其资质与条款，并遵守所在地法律法规。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -114,9 +115,16 @@
       return '<div class="tier-line abn">价格分层：异常低价（约官方价 ' + pct + '%）——明显低于官方价，请注意甄别来源与稳定性风险</div>';
     return '<div class="tier-line">价格分层：' + tier + '（约官方价 ' + pct + '%）</div>';
   };
-  const priceRows = (svc.prices || []).map(p =>
+  /* 分组价行（第二十二轮）：价格行按非 default 分组换算时，行旁标「分组价」并注明分组名 */
+  const groupLine = p => p.group_price
+    ? '<div class="tier-line" style="color:var(--warn)">分组价（' + esc(p.price_group || '') + ' 分组）——非默认分组价格</div>'
+    : '';
+  /* 有效价格行：invalid 行（占位倍率行换算产物，数据层已标）不展示、不参与计算；
+     全部行 invalid 时价格区走「待核实」呈现（priceBlock 的空分支＋prices_note 说明） */
+  const validPrices = (svc.prices || []).filter(p => !p.invalid);
+  const priceRows = validPrices.map(p =>
     '<tr><td><strong>' + esc(p.model_label) + '</strong>' +
-    (p.note ? '<div style="color:var(--ink-3);font-size:12px">' + esc(p.note) + '</div>' : '') + tierLine(p) + '</td>' +
+    (p.note ? '<div style="color:var(--ink-3);font-size:12px">' + esc(p.note) + '</div>' : '') + tierLine(p) + groupLine(p) + '</td>' +
     '<td class="price">' + fmtUsd(p.input) + '</td><td class="price">' + fmtUsd(p.output) + '</td>' +
     '<td class="price">' + (p.cache_read != null ? fmtUsd(p.cache_read) : '—') + '</td>' +
     '<td>' + esc(p.currency) + ' · ' + esc(p.unit) + '</td>' +
@@ -126,7 +134,9 @@
     (svc.price_consistency === 'inconsistent'
       ? '<p class="note">价格一致性提示：其 Claude Sonnet 5.5 与 4.6 相对官方价的比例差异异常，本站已暂停其「低价」归类，待人工复核。</p>' : '') +
     (hasAbnormalPrice(svc)
-      ? '<p class="note">异常低价提示：其 Sonnet 价格低于官方价的三成，低得异常；价格低不代表来源合规或服务稳定，请自行评估，本站不作推荐。</p>' : '');
+      ? '<p class="note">异常低价提示：其 Sonnet 价格低于官方价的三成，低得异常；价格低不代表来源合规或服务稳定，请自行评估，本站不作推荐。</p>' : '') +
+    (svc.price_group_status === 'non_default' && priceRows
+      ? '<p class="note">价格分组提示：其 Sonnet 锚点价格取自非默认分组（分组价），本站已暂停其「低价」归类；价格行旁标有「分组价」，默认分组价格请以官网定价为准。</p>' : '');
 
   const priceBlock = priceRows
     ? '<div class="tablewrap"><table class="cmp"><thead><tr><th>模型</th><th>输入价</th><th>输出价</th><th>缓存读价</th><th>计费单位</th><th>数据来源</th></tr></thead><tbody>' + priceRows + '</tbody></table></div>'
@@ -138,7 +148,7 @@
     : '<p>' + UNKNOWN + '</p>';
 
   /* 支持模型全清单（本站已核实到的范围）：标价模型 ∪ 主打模型 */
-  const pricedModels = (svc.prices || []).map(p => p.model_label);
+  const pricedModels = validPrices.map(p => p.model_label);
   const allModels = Array.from(new Set(pricedModels.concat(svc.models_highlight || [])));
   const modelBlock =
     '<div class="chips" style="margin-bottom:10px">' +
@@ -167,14 +177,14 @@
   /* 同类推荐：按共享厂商/模型家族计分，取 6 家（自动匹配，不构成推荐） */
   const myFam = new Set(familiesOf(svc));
   const myVendors = new Set(svc.vendors || []);
-  const myPriced = new Set((svc.prices || []).map(p => p.model_id));
+  const myPriced = new Set(validPrices.map(p => p.model_id));
   const similar = data.services
     .filter(s => s.id !== svc.id && s.type !== '导航站')
     .map(s => {
       let score = 0;
       familiesOf(s).forEach(f => { if (myFam.has(f)) score += 2; });
       (s.vendors || []).forEach(v => { if (myVendors.has(v)) score += 1; });
-      (s.prices || []).forEach(p => { if (myPriced.has(p.model_id)) score += 2; });
+      (s.prices || []).forEach(p => { if (!p.invalid && myPriced.has(p.model_id)) score += 2; });
       return { s, score };
     })
     .filter(x => x.score > 0)

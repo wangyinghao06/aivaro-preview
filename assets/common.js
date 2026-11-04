@@ -79,9 +79,10 @@ function hostOf(url) {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return url; }
 }
 
-/* 该服务已核实的最低美元输入价对应的价格记录（含模型名）；无则 null */
+/* 该服务已核实的最低美元输入价对应的价格记录（含模型名）；无则 null。
+   invalid 价格行（占位倍率行换算产物等，数据层已标 invalid）不参与任何价格计算 */
 function minUsdPriceRec(svc) {
-  const usd = (svc.prices || []).filter(p => p.currency === 'USD' && p.input != null);
+  const usd = (svc.prices || []).filter(p => p.currency === 'USD' && p.input != null && !p.invalid);
   if (!usd.length) return null;
   return usd.reduce((a, b) => (b.input < a.input ? b : a));
 }
@@ -131,7 +132,7 @@ function hasAbnormalPrice(svc) {
 function tierBadgeHTML(svc) {
   if (!svc) return '';
   if (hasAbnormalPrice(svc)) return '<span class="badge tier abn">异常低价 · 注意风险</span>';
-  if (!svc.price_tier || svc.price_consistency === 'inconsistent') return '';
+  if (!svc.price_tier || svc.price_consistency === 'inconsistent' || svc.price_group_status === 'non_default') return '';
   return '<span class="badge tier">' + esc(svc.price_tier) + '</span>';
 }
 
@@ -265,7 +266,7 @@ function adRowHTML(data) {
 /* 核实完整度：核心字段中已核实到的项数（用于综合排序的代偿维度，口径见关于页） */
 function completeness(svc) {
   let n = 0;
-  if ((svc.prices || []).length) n++;
+  if ((svc.prices || []).some(p => !p.invalid)) n++;
   if ((svc.payments || []).length) n++;
   if (svc.free_quota && svc.free_quota.has !== null && svc.free_quota.has !== undefined) n++;
   if (svc.registration) n++;

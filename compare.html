@@ -94,7 +94,7 @@
     </table>
   </div>
   <p class="note" id="cmpNote"></p>
-  <p class="note">价格口径提示：各家计价方式并不相同（有的另收购积分平台费、有的收 API 服务费、有的走折扣渠道），表内只列公示单价，附加费用见各服务详情页的「计费模式」。绿色行 = 当前排序列的最低价；相对官方价低于三成的「异常低价」条目带风险提示、且不参与最低价高亮判定；未公示该列价格的服务排在表尾且不参与最低价判定。不同币种不混排：本表只纳入美元标价的已核实条目，人民币价目见各服务详情页。</p>
+  <p class="note">价格口径提示：各家计价方式并不相同（有的另收购积分平台费、有的收 API 服务费、有的走折扣渠道），表内只列公示单价，附加费用见各服务详情页的「计费模式」。绿色行 = 当前排序列的最低价；相对官方价低于三成的「异常低价」条目带风险提示、且不参与最低价高亮判定；按非默认分组换算的「分组价」行内标有「分组价」，同样不参与最低价高亮判定；未公示该列价格的服务排在表尾且不参与最低价判定。不同币种不混排：本表只纳入美元标价的已核实条目，人民币价目见各服务详情页。</p>
 </main>
 
 <footer>
@@ -115,6 +115,7 @@
       </form>
     </div>
     <p class="rel"><strong>关系声明：</strong>Aivaro 是独立的导航与信息整理站，收录并核实公开服务信息，提供服务发现、比较与官网导航。本站与所收录的第三方服务<strong>没有运营、代理或隶属关系</strong>。价格随服务商调整，请以官网实时页面为准。</p>
+    <p class="disclaimer">本站仅提供网址信息整理与导航，不提供网络代理、跨境访问或 API 转发服务；站内所列第三方服务均由其运营者负责，本站不对其合规性、可用性与价格作保证；使用任何第三方服务前，请自行核实其资质与条款，并遵守所在地法律法规。</p>
     <p>Aivaro 导航 · 数据核实于 2026-11-03 · 页面由 data/services.json 驱动渲染</p>
   </div>
 </footer>
@@ -140,7 +141,7 @@
     const unverified = [];
     services.forEach(s => {
       if (s.type === '导航站') return;
-      const p = (s.prices || []).find(x => x.model_id === current);
+      const p = (s.prices || []).find(x => x.model_id === current && !x.invalid);
       if (p) rows.push({ svc: s, price: p });
       else unverified.push(s.name);
     });
@@ -154,14 +155,17 @@
     });
     /* 异常低价（第十九轮裁决 4d）：该模型相对官方价比例 <30% 的条目不参与最低价高亮，并带风险提示 */
     const abnOf = r => { const pr = (r.svc.price_ratio || {})[current]; return !!(pr && pr.ratio < 0.3); };
+    /* 分组价（第二十三轮裁决 2b）：按非 default 分组换算的价格行（group_price=true）行内标「分组价」，同样不参与最低价高亮 */
+    const grpOf = r => r.price.group_price === true;
     const priced = rows.filter(r => val(r) != null);
-    const bestPool = priced.filter(r => !abnOf(r));
+    const bestPool = priced.filter(r => !abnOf(r) && !grpOf(r));
     const best = bestPool.length ? val(bestPool[0]) : null;
     document.getElementById('cmpBody').innerHTML = rows.map(r =>
-      '<tr' + (best != null && val(r) === best && !abnOf(r) ? ' class="best"' : '') + '>' +
+      '<tr' + (best != null && val(r) === best && !abnOf(r) && !grpOf(r) ? ' class="best"' : '') + '>' +
       '<td><strong>' + esc(r.svc.name) + '</strong>' +
         (r.price.note ? '<div style="color:var(--ink-3);font-size:12px">' + esc(r.price.note) + '</div>' : '') +
-        (abnOf(r) ? '<div class="abn-tag">异常低价（低于官方价三成），注意风险</div>' : '') + '</td>' +
+        (abnOf(r) ? '<div class="abn-tag">异常低价（低于官方价三成），注意风险</div>' : '') +
+        (grpOf(r) ? '<div class="grp-tag">分组价（非默认分组价格）</div>' : '') + '</td>' +
       '<td class="price">' + fmtUsd(r.price.input) + '</td>' +
       '<td class="price">' + fmtUsd(r.price.output) + '</td>' +
       '<td class="price">' + (r.price.cache_read != null ? fmtUsd(r.price.cache_read) : '—') + '</td>' +
